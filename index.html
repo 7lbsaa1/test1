@@ -66,7 +66,7 @@
             filter: brightness(0.6); /* تعتيم بسيط لظهور الكلام */
         }
 
-        /* تنسيق زر الوضع الداكن الجديد (مثل الصورة المرفقة) */
+        /* تنسيق زر الوضع الداكن باستخدام الصورة mode2.jpg */
         .theme-switch-wrapper {
             position: fixed;
             top: 20px;
@@ -75,52 +75,18 @@
             display: flex;
             align-items: center;
         }
-        .theme-switch {
-            display: inline-block;
-            height: 40px;
-            position: relative;
+        .theme-toggle-image {
             width: 80px;
-        }
-        .theme-switch input {
-            display: none;
-        }
-        .slider {
-            background-color: #2b2b3d; /* لون الخلفية الغامق */
-            bottom: 0;
+            height: auto;
             cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: 34px;
-            border: 2px solid #3e3e56;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
         }
-        .slider:before {
-            background-color: #484865; /* لون الدائرة المتحركة */
-            bottom: 4px;
-            content: "☀️"; /* أيقونة الشمس */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            height: 28px;
-            left: 6px;
-            position: absolute;
-            transition: .4s;
-            width: 28px;
-            border-radius: 50%;
-            color: white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        .theme-toggle-image:hover {
+            transform: scale(1.1);
         }
-        /* حالة الوضع الداكن */
-        input:checked + .slider:before {
-            transform: translateX(38px);
-            content: "🌙"; /* أيقونة القمر */
-            background-color: #5d5d81;
-        }
-        input:checked + .slider {
-            background-color: #232333;
+        #checkbox {
+            display: none;
         }
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
@@ -137,13 +103,26 @@
              animation: shimmer 4s linear infinite;
         }
         .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.6; }
+        
+        /* تنسيق زر التواصل باستخدام الصورة kiki.jpg */
         .contact-btn { 
-             display: inline-block; padding: 12px 35px; 
-             background: #e63946; color: white; text-decoration: none; 
-             border-radius: 50px; font-weight: bold; border: 2px solid white;
-             box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+             display: inline-block; 
+             text-decoration: none; 
              animation: pulse-btn 2s infinite;
+             background: transparent;
+             border: none;
+             padding: 0;
         }
+        .contact-img {
+            max-width: 180px;
+            height: auto;
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+        }
+        .contact-img:hover {
+            transform: scale(1.05);
+        }
+        
         @keyframes pulse-btn {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -187,18 +166,17 @@
             header h1 { font-size: 3.8em; }
             .cards-container { grid-template-columns: repeat(3, 1fr); gap: 30px; }
             body { padding: 40px; }
+            .contact-img { max-width: 220px; }
         }
         @keyframes shimmer { to { background-position: 300% center; } }
     </style>
 </head>
 <body>
     
-    <!-- زر تبديل الوضع (تصميم جديد مشابه لـ mode.jpg) -->
+    <!-- زر تبديل الوضع باستخدام الصورة mode2.jpg -->
     <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider"></div>
-        </label>
+        <img id="themeToggleImg" src="mode2.jpg" alt="تبديل الوضع" class="theme-toggle-image">
+        <input type="checkbox" id="checkbox" />
     </div>
 
     <!-- خلفية الفيديو koko2 فقط -->
@@ -215,7 +193,10 @@
                 المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة<br>
                 <strong>7LBSAA • 7LBSAA1</strong>
             </div>
-            <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn">تواصل معنا 📞</a>
+            <!-- زر التواصل باستخدام الصورة kiki.jpg -->
+            <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn">
+                <img src="kiki.jpg" alt="تواصل معنا" class="contact-img">
+            </a>
 
             <div class="search-container">
                 <div class="search-input-container">
@@ -263,17 +244,23 @@
     </div>
 
     <script>
-        // تفعيل زر الوضع الداكن الجديد
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        // تفعيل زر الوضع الداكن باستخدام الصورة
+        const toggleSwitch = document.getElementById('checkbox');
+        const themeToggleImg = document.getElementById('themeToggleImg');
         
-        function switchTheme(e) {
-            if (e.target.checked) {
+        function switchTheme() {
+            if (toggleSwitch.checked) {
                 document.body.classList.add('dark-mode');
             } else {
                 document.body.classList.remove('dark-mode');
             }
         }
-        toggleSwitch.addEventListener('change', switchTheme);
+        
+        // تشغيل التبديل عند الضغط على الصورة
+        themeToggleImg.addEventListener('click', () => {
+            toggleSwitch.checked = !toggleSwitch.checked;
+            switchTheme();
+        });
 
         // بحث الكروت
         const searchInput = document.getElementById('searchInput');
@@ -328,4 +315,4 @@
         animate();
     </script>
 </body>
-</html>Scroll down
+</html>
