@@ -42,8 +42,7 @@
              position: relative; 
              color: var(--text-color);
         }
-
-        /* تنسيق خلفية الفيديو */
+        /* خلفية الفيديو koko2 فقط */
         .video-background {
             position: fixed;
             top: 0;
@@ -63,68 +62,59 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            filter: brightness(0.6); /* تعتيم بسيط لظهور الكلام */
+            opacity: 1;
+            filter: brightness(0.7);
         }
-
-        /* تنسيق زر الوضع الداكن الجديد (مثل الصورة المرفقة) */
-        .theme-switch-wrapper {
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        
+        /* تحكم الوضع الداكن/فاتح بناءً على الصورة المرفقة */
+        .theme-toggles {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 100;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
         }
-        .theme-switch {
-            display: inline-block;
-            height: 40px;
-            position: relative;
+        .toggle-switch {
             width: 80px;
-        }
-        .theme-switch input {
-            display: none;
-        }
-        .slider {
-            background-color: #2b2b3d; /* لون الخلفية الغامق */
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: 34px;
-            border: 2px solid #3e3e56;
-        }
-        .slider:before {
-            background-color: #484865; /* لون الدائرة المتحركة */
-            bottom: 4px;
-            content: "☀️"; /* أيقونة الشمس */
+            height: 40px;
+            background: rgba(50,50,60,0.8);
+            border-radius: 20px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 18px;
-            height: 28px;
-            left: 6px;
-            position: absolute;
-            transition: .4s;
-            width: 28px;
+            padding: 5px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .toggle-switch.active {
+            background: rgba(255,215,0,0.8);
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+            border-color: rgba(255,215,0,0.6);
+        }
+        .toggle-switch::before {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: white;
             border-radius: 50%;
-            color: white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
         }
-        /* حالة الوضع الداكن */
-        input:checked + .slider:before {
-            transform: translateX(38px);
-            content: "🌙"; /* أيقونة القمر */
-            background-color: #5d5d81;
+        .dark-toggle::before {
+            content: '🌙';
+            margin-left: auto;
         }
-        input:checked + .slider {
-            background-color: #232333;
+        .light-toggle::before {
+            content: '☀️';
+            margin-left: 0;
         }
-
-        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
         header { text-align: center; color: white; padding: 20px 0; margin-bottom: 20px; }
         header h1 { 
@@ -192,18 +182,15 @@
     </style>
 </head>
 <body>
-    
-    <!-- زر تبديل الوضع (تصميم جديد مشابه لـ mode.jpg) -->
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider"></div>
-        </label>
+    <!-- تحكم الوضع الداكن/فاتح بناءً على الصورة mode.jpg -->
+    <div class="theme-toggles">
+        <div class="toggle-switch dark-toggle active" data-mode="dark"></div>
+        <div class="toggle-switch light-toggle" data-mode="light"></div>
     </div>
 
     <!-- خلفية الفيديو koko2 فقط -->
     <div class="video-background">
-        <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
+        <video id="video2" class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
     </div>
 
     <canvas id="particles-canvas"></canvas>
@@ -263,21 +250,27 @@
     </div>
 
     <script>
-        // تفعيل زر الوضع الداكن الجديد
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        
-        function switchTheme(e) {
-            if (e.target.checked) {
-                document.body.classList.add('dark-mode');
-            } else {
-                document.body.classList.remove('dark-mode');
-            }
-        }
-        toggleSwitch.addEventListener('change', switchTheme);
+        // تحكم الوضع الداكن/فاتح
+        const themeToggles = document.querySelectorAll('.toggle-switch');
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const mode = toggle.dataset.mode;
+                if(mode === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    document.querySelector('.dark-toggle').classList.add('active');
+                    document.querySelector('.light-toggle').classList.remove('active');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.querySelector('.light-toggle').classList.add('active');
+                    document.querySelector('.dark-toggle').classList.remove('active');
+                }
+            });
+        });
 
-        // بحث الكروت
+        // وظيفة البحث
         const searchInput = document.getElementById('searchInput');
         const cards = document.querySelectorAll('.card');
+
         searchInput.addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
             cards.forEach(card => {
@@ -290,7 +283,7 @@
             });
         });
 
-        // خلفية الجسيمات (Particles)
+        // جسيمات الصفحة
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         function resize() {
