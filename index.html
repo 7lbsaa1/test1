@@ -66,7 +66,7 @@
             filter: brightness(0.6); /* تعتيم بسيط لظهور الكلام */
         }
 
-        /* تنسيق زر الوضع الداكن باستخدام الصورة mode2.jpg */
+        /* تنسيق زر تبديل الوضع باستخدام صورة mode2.jpg */
         .theme-switch-wrapper {
             position: fixed;
             top: 20px;
@@ -75,18 +75,30 @@
             display: flex;
             align-items: center;
         }
-        .theme-toggle-image {
+        .theme-switch {
+            display: inline-block;
+            height: 40px;
+            position: relative;
             width: 80px;
-            height: auto;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
         }
-        .theme-toggle-image:hover {
-            transform: scale(1.1);
-        }
-        #checkbox {
+        .theme-switch input {
             display: none;
+        }
+        .slider {
+            background-image: url('mode2.jpg');
+            background-size: 200% 100%;
+            background-position: left center;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: background-position .4s ease;
+            border-radius: 34px;
+        }
+        input:checked + .slider {
+            background-position: right center;
         }
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
@@ -104,23 +116,22 @@
         }
         .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.6; }
         
-        /* تنسيق زر التواصل باستخدام الصورة kiki.jpg */
+        /* تنسيق زر التواصل باستخدام صورة kiki.jpg */
         .contact-btn { 
              display: inline-block; 
-             text-decoration: none; 
-             animation: pulse-btn 2s infinite;
+             padding: 5px;
              background: transparent;
              border: none;
-             padding: 0;
+             border-radius: 50px;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+             animation: pulse-btn 2s infinite;
+             text-decoration: none;
         }
-        .contact-img {
-            max-width: 180px;
-            height: auto;
-            border-radius: 50px;
-            transition: transform 0.3s ease;
-        }
-        .contact-img:hover {
-            transform: scale(1.05);
+        .contact-btn img {
+             width: 120px;
+             height: auto;
+             border-radius: 50px;
+             display: block;
         }
         
         @keyframes pulse-btn {
@@ -166,17 +177,19 @@
             header h1 { font-size: 3.8em; }
             .cards-container { grid-template-columns: repeat(3, 1fr); gap: 30px; }
             body { padding: 40px; }
-            .contact-img { max-width: 220px; }
+            .contact-btn img { width: 150px; }
         }
         @keyframes shimmer { to { background-position: 300% center; } }
     </style>
 </head>
 <body>
     
-    <!-- زر تبديل الوضع باستخدام الصورة mode2.jpg -->
+    <!-- زر تبديل الوضع باستخدام صورة mode2.jpg -->
     <div class="theme-switch-wrapper">
-        <img id="themeToggleImg" src="mode2.jpg" alt="تبديل الوضع" class="theme-toggle-image">
-        <input type="checkbox" id="checkbox" />
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+        </label>
     </div>
 
     <!-- خلفية الفيديو koko2 فقط -->
@@ -193,9 +206,10 @@
                 المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة<br>
                 <strong>7LBSAA • 7LBSAA1</strong>
             </div>
-            <!-- زر التواصل باستخدام الصورة kiki.jpg -->
+            
+            <!-- زر التواصل باستخدام صورة kiki.jpg -->
             <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn">
-                <img src="kiki.jpg" alt="تواصل معنا" class="contact-img">
+                <img src="kiki.jpg" alt="تواصل معنا">
             </a>
 
             <div class="search-container">
@@ -244,23 +258,17 @@
     </div>
 
     <script>
-        // تفعيل زر الوضع الداكن باستخدام الصورة
-        const toggleSwitch = document.getElementById('checkbox');
-        const themeToggleImg = document.getElementById('themeToggleImg');
+        // تفعيل زر الوضع الداكن
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
         
-        function switchTheme() {
-            if (toggleSwitch.checked) {
+        function switchTheme(e) {
+            if (e.target.checked) {
                 document.body.classList.add('dark-mode');
             } else {
                 document.body.classList.remove('dark-mode');
             }
         }
-        
-        // تشغيل التبديل عند الضغط على الصورة
-        themeToggleImg.addEventListener('click', () => {
-            toggleSwitch.checked = !toggleSwitch.checked;
-            switchTheme();
-        });
+        toggleSwitch.addEventListener('change', switchTheme);
 
         // بحث الكروت
         const searchInput = document.getElementById('searchInput');
