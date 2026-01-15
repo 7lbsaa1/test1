@@ -33,7 +33,7 @@
             --header-text: #ffd700;
             --accent-color: #ffd700;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s ease, color 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
         body { 
              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
              min-height: 100vh; 
@@ -66,7 +66,7 @@
             filter: brightness(0.6);
         }
 
-        /* تنسيق زر الوضع الداكن الجديد */
+        /* تنسيق زر الوضع الداكن - زر واحد يتحول */
         .theme-switch-wrapper {
             position: fixed;
             top: 20px;
@@ -75,22 +75,40 @@
             display: flex;
             align-items: center;
         }
-        .theme-switch-btn {
-            width: 60px;
-            height: 60px;
-            background: none;
+        .theme-toggle-btn {
+            width: 70px;
+            height: 70px;
             border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             cursor: pointer;
-            padding: 0;
-            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .theme-switch-btn:hover {
+        .theme-toggle-btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+            background: rgba(255, 255, 255, 0.25);
         }
-        .theme-switch-btn img {
-            width: 100%;
-            height: 100%;
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+        .theme-toggle-btn img {
+            width: 45px;
+            height: 45px;
             object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        body.dark-mode .theme-toggle-btn img {
+            filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
         }
 
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
@@ -105,57 +123,175 @@
              -webkit-background-clip: text; background-clip: text;
              -webkit-text-fill-color: transparent;
              animation: shimmer 4s linear infinite;
+             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.6; }
-        .contact-btn { 
-             display: inline-block;
-             background: none;
-             border: none;
-             cursor: pointer;
-             padding: 0;
-             transition: transform 0.3s ease;
+        
+        /* زر التواصل احترافي */
+        .contact-btn-wrapper {
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .contact-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4),
+                        0 0 20px rgba(255, 107, 107, 0.2),
+                        inset -2px -2px 5px rgba(0, 0, 0, 0.2),
+                        inset 2px 2px 5px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         .contact-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6),
+                        0 0 30px rgba(255, 107, 107, 0.4),
+                        inset -2px -2px 5px rgba(0, 0, 0, 0.3),
+                        inset 2px 2px 5px rgba(255, 255, 255, 0.4);
+        }
+        .contact-btn:active {
+            transform: scale(0.98);
         }
         .contact-btn img {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+            position: relative;
+            z-index: 1;
         }
+
         .search-container { margin: 30px auto; max-width: 600px; padding: 0 10px; }
         .search-input-container { 
-             background: white; border-radius: 50px; padding: 5px; 
-             display: flex; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+             background: rgba(255, 255, 255, 0.95); 
+             border-radius: 50px; 
+             padding: 8px; 
+             display: flex; 
+             align-items: center; 
+             box-shadow: 0 15px 35px rgba(0,0,0,0.2),
+                         inset 0 1px 3px rgba(255,255,255,0.3);
+             backdrop-filter: blur(10px);
         }
         .search-input { 
-             flex: 1; border: none; outline: none; padding: 12px 25px; 
-             font-size: 1.1em; border-radius: 50px; width: 100%;
+             flex: 1; 
+             border: none; 
+             outline: none; 
+             padding: 14px 25px; 
+             font-size: 1.1em; 
+             border-radius: 50px; 
+             width: 100%;
+             background: transparent;
+             color: #333;
+        }
+        .search-input::placeholder {
+            color: #999;
         }
         .cards-container { 
-             display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 50px; 
+             display: grid; 
+             grid-template-columns: 1fr; 
+             gap: 25px; 
+             margin-bottom: 50px; 
         }
         .card { 
-             background: var(--card-bg); border-radius: 25px; overflow: hidden; 
+             background: var(--card-bg); 
+             border-radius: 25px; 
+             overflow: hidden; 
              border: 1px solid rgba(255, 255, 255, 0.1); 
-             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: 0.3s transform ease;
+             box-shadow: 0 15px 35px rgba(0,0,0,0.15),
+                         0 0 20px rgba(0,0,0,0.1);
+             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+             position: relative;
         }
-        .card:hover { transform: translateY(-10px); }
-        .card-image { width: 100%; height: 220px; object-fit: cover; }
-        .card-content { padding: 25px; text-align: center; }
-        .card-content h2 { color: var(--accent-color); margin-bottom: 12px; font-size: 1.6em; }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        .card:hover { 
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25),
+                        0 0 40px rgba(0,0,0,0.15);
+        }
+        .card-image { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+        }
+        .card-content { 
+            padding: 25px; 
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .card-content h2 { 
+            color: var(--accent-color); 
+            margin-bottom: 12px; 
+            font-size: 1.6em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
         body.dark-mode .card-content p { color: #bbb; }
         .card-button { 
-             display: inline-block; padding: 12px 35px; 
-             background: #1216f3; color: white; text-decoration: none; 
-             border-radius: 50px; font-weight: bold; margin-top: 15px;
-            transition: 0.3s;
+             display: inline-block; 
+             padding: 12px 35px; 
+             background: linear-gradient(135deg, #1216f3 0%, #0004ff 100%); 
+             color: white; 
+             text-decoration: none; 
+             border-radius: 50px; 
+             font-weight: bold; 
+             margin-top: 15px;
+             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+             box-shadow: 0 5px 15px rgba(18, 22, 243, 0.3);
+             border: none;
         }
-        .card-button:hover { background: #0004ff; box-shadow: 0 5px 15px rgba(18, 22, 243, 0.4); }
+        .card-button:hover { 
+            background: linear-gradient(135deg, #0004ff 0%, #1216f3 100%);
+            box-shadow: 0 10px 25px rgba(18, 22, 243, 0.5);
+            transform: translateY(-3px);
+        }
         footer { 
-             background: var(--footer-bg); padding: 30px; 
-             border-radius: 25px; text-align: center; margin-top: 20px;
+             background: var(--footer-bg); 
+             padding: 30px; 
+             border-radius: 25px; 
+             text-align: center; 
+             margin-top: 20px;
+             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         @media (min-width: 768px) {
             header h1 { font-size: 3.8em; }
@@ -167,10 +303,10 @@
 </head>
 <body>
     
-    <!-- زر تبديل الوضع الجديد -->
+    <!-- زر تبديل الوضع الداكن - يتحول عند الضغط -->
     <div class="theme-switch-wrapper">
-        <button class="theme-switch-btn" id="themeToggle">
-            <img src="mode2.jpg" alt="تبديل الوضع">
+        <button class="theme-toggle-btn" id="themeToggle" title="تبديل الوضع">
+            <img id="themeIcon" src="mode2.jpg" alt="تبديل الوضع">
         </button>
     </div>
 
@@ -188,9 +324,11 @@
                 المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة<br>
                 <strong>7LBSAA • 7LBSAA1</strong>
             </div>
-            <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn">
-                <img src="kiki.jpg" alt="تواصل معنا">
-            </a>
+            <div class="contact-btn-wrapper">
+                <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn" title="تواصل معنا">
+                    <img src="kiki.jpg" alt="تواصل معنا">
+                </a>
+            </div>
 
             <div class="search-container">
                 <div class="search-input-container">
@@ -238,11 +376,29 @@
     </div>
 
     <script>
-        // تفعيل زر الوضع الداكن الجديد
+        // تفعيل زر الوضع الداكن - يتحول عند الضغط
         const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // التحقق من الوضع المحفوظ
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.src = 'mode2_dark.jpg'; // صورة الوضع الداكن
+        } else {
+            themeIcon.src = 'mode2.jpg'; // صورة الوضع الفاتح
+        }
         
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
+            
+            // حفظ الإعدادات
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.src = 'mode2_dark.jpg'; // الصورة عند الوضع الداكن
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.src = 'mode2.jpg'; // الصورة عند الوضع الفاتح
+            }
         });
 
         // بحث الكروت
