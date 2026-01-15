@@ -42,7 +42,8 @@
              position: relative; 
              color: var(--text-color);
         }
-        /* خلفية الفيديو */
+
+        /* تنسيق خلفية الفيديو */
         .video-background {
             position: fixed;
             top: 0;
@@ -62,22 +63,69 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            filter: brightness(0.7); /* لتعيين توهج مناسب للمحتوى فوقه */
+            filter: brightness(0.6); /* تعتيم بسيط لظهور الكلام */
         }
-        .bg-video.active {
-            opacity: 1;
+
+        /* تنسيق زر الوضع الداكن الجديد (مثل الصورة المرفقة) */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
         }
+        .theme-switch {
+            display: inline-block;
+            height: 40px;
+            position: relative;
+            width: 80px;
+        }
+        .theme-switch input {
+            display: none;
+        }
+        .slider {
+            background-color: #2b2b3d; /* لون الخلفية الغامق */
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+            border: 2px solid #3e3e56;
+        }
+        .slider:before {
+            background-color: #484865; /* لون الدائرة المتحركة */
+            bottom: 4px;
+            content: "☀️"; /* أيقونة الشمس */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            height: 28px;
+            left: 6px;
+            position: absolute;
+            transition: .4s;
+            width: 28px;
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        /* حالة الوضع الداكن */
+        input:checked + .slider:before {
+            transform: translateX(38px);
+            content: "🌙"; /* أيقونة القمر */
+            background-color: #5d5d81;
+        }
+        input:checked + .slider {
+            background-color: #232333;
+        }
+
         #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-        .theme-toggle {
-            position: fixed; top: 20px; left: 20px; z-index: 100;
-            background: rgba(255,255,255,0.2); border: 2px solid white;
-            padding: 10px; border-radius: 50%; cursor: pointer; width: 45px; height: 45px;
-            display: flex; align-items: center; justify-content: center; backdrop-filter: blur(5px);
-            font-size: 1.2rem;
-        }
+
         header { text-align: center; color: white; padding: 20px 0; margin-bottom: 20px; }
         header h1 { 
              font-size: 2.5em;
@@ -144,11 +192,18 @@
     </style>
 </head>
 <body>
-    <button class="theme-toggle" id="themeBtn" title="تبديل الوضع">🌙</button>
     
-    <!-- خلفية الفيديو -->
+    <!-- زر تبديل الوضع (تصميم جديد مشابه لـ mode.jpg) -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+        </label>
+    </div>
+
+    <!-- خلفية الفيديو koko2 فقط -->
     <div class="video-background">
-        <video id="video" class="bg-video" src="videos/koko2.mp4" muted loop autoplay></video>
+        <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
     </div>
 
     <canvas id="particles-canvas"></canvas>
@@ -208,16 +263,21 @@
     </div>
 
     <script>
-        const themeBtn = document.getElementById('themeBtn');
-        themeBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            themeBtn.innerText = isDark ? '☀️' : '🌙';
-        });
+        // تفعيل زر الوضع الداكن الجديد
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+        toggleSwitch.addEventListener('change', switchTheme);
 
+        // بحث الكروت
         const searchInput = document.getElementById('searchInput');
         const cards = document.querySelectorAll('.card');
-
         searchInput.addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
             cards.forEach(card => {
@@ -230,27 +290,7 @@
             });
         });
 
-        // تبديل الفيديوين كل 10 ثوانٍ
-        const video1 = document.getElementById('video1');
-        const video2 = document.getElementById('video2');
-        let currentVideo = 1;
-        const switchInterval = 10000; // 10 ثوانٍ
-
-        function switchVideos() {
-            if (currentVideo === 1) {
-                video1.classList.remove('active');
-                video2.classList.add('active');
-                currentVideo = 2;
-            } else {
-                video2.classList.remove('active');
-                video1.classList.add('active');
-                currentVideo = 1;
-            }
-        }
-
-        // بدء التبديل تلقائيًا
-        setInterval(switchVideos, switchInterval);
-
+        // خلفية الجسيمات (Particles)
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         function resize() {
