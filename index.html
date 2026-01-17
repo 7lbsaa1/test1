@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>موقع حلبسة | المنصة الرسمية لـ 7LBSAA</title>
-  <meta name="description" content="موقع حلبسة: أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية ودليلك الشامل لأفضل مدرسي الثانوية العامة وتحديات كرة القدم." />
+  <meta name="description" content="موقع حلبسة: مكتبة تمبلتات ميمز مصرية، أفضل مدرسين الثانوية العامة، وتحديات معلومات كرة القدم." />
 
   <!-- Favicons -->
   <link rel="icon" href="logo.png" type="image/png" sizes="96x96" />
@@ -15,338 +15,365 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/" />
   <meta property="og:title" content="موقع حلبسة | المنصة الرسمية لـ 7LBSAA" />
-  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم." />
+  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم." />
   <meta property="og:image" content="logoshare.png" />
 
   <style>
     :root{
-      --bg-grad: linear-gradient(135deg,#6e63ff 0%,#1c34bb 100%);
-      --text: #222;
-      --accent: #5f7cff;
-      --glass: rgba(255,255,255,.16);
-      --glass-strong: rgba(255,255,255,.22);
-      --blur: 18px;
-      --border: rgba(255,255,255,.35);
-      --shadow: 0 10px 40px rgba(0,0,0,.18);
-      --toggle-w: 128px;
-      --toggle-h: 56px;
-      --knob: 44px;
+      --bg:#f4f6ff;
+      --text:#1b1f36;
+      --muted:rgba(27,31,54,.75);
+      --glass:rgba(255,255,255,.9);
+      --glass-strong:rgba(255,255,255,.95);
+      --border:rgba(25,33,80,.12);
+      --shadow:0 25px 65px rgba(21,29,72,.15);
+      --button-grad:linear-gradient(135deg,#5374ff,#7959ff);
+      --button-shadow:0 15px 30px rgba(83,116,255,.3);
     }
     body.dark-mode{
-      --bg-grad: linear-gradient(135deg,#121428 0%,#0b0e1d 100%);
-      --text: #e8e8e8;
-      --accent: #ffd54d;
-      --glass: rgba(20,24,45,.36);
-      --glass-strong: rgba(20,24,45,.46);
-      --blur: 20px;
-      --border: rgba(255,213,77,.22);
-      --shadow: 0 12px 48px rgba(0,0,0,.35);
+      --bg:#01030a;
+      --text:#eef2ff;
+      --muted:rgba(235,239,255,.7);
+      --glass:rgba(18,20,38,.78);
+      --glass-strong:rgba(10,12,25,.9);
+      --border:rgba(255,255,255,.09);
+      --shadow:0 30px 70px rgba(0,0,0,.55);
+      --button-grad:linear-gradient(135deg,#5ba3ff,#375eff);
+      --button-shadow:0 18px 32px rgba(55,94,255,.45);
     }
 
-    *{box-sizing:border-box;transition:.35s ease}
+    *{box-sizing:border-box; transition:all .35s ease}
     body{
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      min-height:100vh; margin:0; padding:16px 16px 40px;
-      color:var(--text); background:var(--bg-grad);
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0; min-height:100vh; padding:18px 18px 60px;
+      background:var(--bg); color:var(--text);
       overflow-x:hidden; position:relative;
     }
 
-    /* Background video clearer */
-    .video-background{position:fixed; inset:0; z-index:-2; overflow:hidden}
+    .video-background{position:fixed; inset:0; z-index:-3; overflow:hidden}
     .bg-video{
-      position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%);
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
       min-width:100%; min-height:100%; object-fit:cover;
-      filter: brightness(.85) contrast(1.05) saturate(1.1);
+      filter:brightness(.68) saturate(1.15);
     }
+    body:not(.dark-mode) .bg-video{filter:brightness(1.05) saturate(1.1)}
 
-    /* Site logo fixed at top-right */
-    .site-brand-fixed{
-      position:fixed; top:14px; right:14px; z-index:110;
-      width:92px; height:92px; border-radius:20px;
-      object-fit:cover;
-      background:var(--glass-strong);
-      border:1px solid var(--border);
-      backdrop-filter: blur(var(--blur));
-      box-shadow: var(--shadow);
-      padding:8px;
-    }
+    #particles-canvas{position:fixed; inset:0; z-index:-2; pointer-events:none}
 
-    /* Theme toggle with smooth image crossfade + moving knob */
     .theme-switch-wrapper{
-      position:fixed; top:16px; left:16px; z-index:110;
+      position:fixed; top:18px; left:18px; z-index:120;
     }
     .theme-toggle{
-      position:relative; width:var(--toggle-w); height:var(--toggle-h);
-      border-radius:999px; border:1px solid var(--border);
-      background:var(--glass-strong);
-      overflow:hidden; cursor:pointer; outline:none; border:none;
-      backdrop-filter: blur(var(--blur));
-      box-shadow: var(--shadow);
-      transform-origin:center;
+      width:128px; height:56px; border-radius:999px;
+      border:1px solid var(--border); background:var(--glass-strong);
+      backdrop-filter:blur(18px); box-shadow:var(--shadow);
+      cursor:pointer; overflow:hidden; padding:0; position:relative;
     }
-    .theme-toggle:hover{ transform: translateY(-2px) scale(1.02) }
-    .theme-toggle:active{ transform: scale(.98) }
-
-    .theme-track{ position:absolute; inset:0; border-radius:inherit }
-    .track-light, .track-dark{
-      width:100%; height:100%; object-fit:cover; display:block;
-      opacity:1; transition: opacity .45s ease, filter .45s ease;
-      filter: saturate(1) contrast(1);
+    .theme-track img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      transition:opacity .45s ease;
     }
-    /* Crossfade images */
-    body:not(.dark-mode) .track-dark{ opacity:0 }
-    body.dark-mode .track-light{ opacity:0 }
+    .track-dark{opacity:0}
+    body.dark-mode .track-light{opacity:0}
+    body.dark-mode .track-dark{opacity:1}
 
-    /* Moving knob */
     .knob{
-      position:absolute; top:50%; left:8px;
-      width:var(--knob); height:var(--knob); border-radius:50%;
-      transform: translateY(-50%);
-      background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,.9), rgba(255,255,255,.6) 60%, rgba(255,255,255,.35) 100%);
-      box-shadow:
-        0 6px 18px rgba(0,0,0,.25),
-        inset 0 2px 8px rgba(255,255,255,.45);
-      border:1px solid var(--border);
-      transition: left .45s cubic-bezier(.22,1,.36,1), background .35s ease, box-shadow .35s ease;
+      position:absolute; top:50%; left:8px; width:44px; height:44px;
+      border-radius:50%; border:1px solid var(--border);
+      background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.95),rgba(255,255,255,.6));
+      box-shadow:0 8px 20px rgba(0,0,0,.3), inset 0 3px 10px rgba(255,255,255,.4);
+      transform:translateY(-50%); transition:left .45s cubic-bezier(.22,1,.36,1);
     }
-    body.dark-mode .knob{
-      left: calc(var(--toggle-w) - var(--knob) - 8px);
-      background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,.85), rgba(200,200,255,.35) 60%, rgba(150,160,255,.22) 100%);
-      box-shadow:
-        0 8px 22px rgba(0,0,0,.35),
-        inset 0 2px 10px rgba(255,255,255,.35);
-    }
+    body.dark-mode .knob{left:calc(128px - 44px - 8px); background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(180,195,255,.35))}
 
-    /* Layout containers with glass look */
-    #particles-canvas{position:fixed; inset:0; z-index:-1; pointer-events:none}
-    .container{max-width:1200px; margin:0 auto; position:relative; z-index:1}
+    .container{max-width:1180px; margin:0 auto; position:relative; z-index:1}
 
-    header{
-      margin:120px 0 20px; padding:24px;
-      border-radius:28px; border:1px solid var(--border);
-      background: linear-gradient( to bottom, var(--glass-strong), var(--glass) );
-      backdrop-filter: blur(var(--blur));
-      box-shadow: var(--shadow); color:#fff; text-align:center;
+    .hero-card{
+      position:relative;
+      margin-top:110px; padding:36px 28px 42px;
+      border-radius:32px; border:1px solid var(--border);
+      background:var(--glass-strong); backdrop-filter:blur(24px);
+      box-shadow:var(--shadow); text-align:center;
     }
-    header h1{
+    .hero-logo{
+      position:absolute; top:-36px; right:-36px;
+      width:150px; height:auto; border-radius:26px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+    .hero-eyebrow{font-size:.95em; letter-spacing:.08em; color:var(--muted); margin:0 0 8px}
+    .hero-card h1{
       margin:0 0 12px; font-size:2.6em;
-      background: linear-gradient(45deg,#fff,#ffd54d,#fff,#ffd54d);
-      background-size:300% auto; -webkit-background-clip:text; background-clip:text;
-      -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite;
-      text-shadow: 0 2px 12px rgba(0,0,0,.25);
+      background:linear-gradient(45deg,#fff,#ffd54d,#fff,#ffd54d);
+      background-size:280% auto; -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; animation:shimmer 4s linear infinite;
     }
-    .brand-tagline{color:rgba(255,255,255,.92); margin-bottom:22px; line-height:1.6}
-
-    /* Contact area */
-    .contact-area{display:flex; justify-content:center; gap:12px; align-items:center; margin-bottom:20px}
-    .contact-area .label{color:#fff; font-weight:700; letter-spacing:.2px}
-    .contact-btn{
-      width:74px; height:74px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
-      background: linear-gradient(135deg, rgba(255,172,51,.9), rgba(233,66,111,.9));
-      border:1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(var(--blur));
+    .hero-desc{margin:0 auto 26px; max-width:640px; color:var(--muted); line-height:1.7}
+    .contact-pill{
+      display:inline-flex; align-items:center; gap:12px;
+      padding:12px 26px; border-radius:999px;
+      background:rgba(255,255,255,.12); border:1px solid var(--border);
+      color:#fff; text-decoration:none; font-weight:700;
+      justify-content:center; box-shadow:var(--shadow);
     }
-    .contact-btn img{width:46px; height:46px; object-fit:contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+    body:not(.dark-mode) .contact-pill{color:#1b1f36}
+    .pill-icon{
+      width:44px; height:44px; border-radius:50%;
+      background:rgba(255,255,255,.2); display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+    .pill-icon img{width:32px; height:32px; object-fit:contain}
 
-    /* Search glass */
-    .search-container{max-width:640px; margin:0 auto 26px}
+    .search-area{margin-top:28px}
     .search-input-container{
-      display:flex; align-items:center; border-radius:999px; padding:8px 14px;
-      background: var(--glass-strong); border:1px solid var(--border); backdrop-filter: blur(var(--blur));
-      box-shadow: var(--shadow)
+      display:flex; align-items:center; gap:12px;
+      padding:10px 16px 10px 24px; border-radius:999px;
+      border:1px solid var(--border); background:var(--glass);
+      backdrop-filter:blur(20px); box-shadow:var(--shadow);
     }
     .search-input{
-      flex:1; border:0; background:transparent; color:var(--text);
-      padding:12px 16px; font-size:1.05em; outline:none
+      flex:1; border:none; background:transparent; font-size:1.05em;
+      color:var(--text); outline:none; padding:12px 8px;
     }
-    .search-input::placeholder{color:rgba(255,255,255,.75)}
-    body:not(.dark-mode) .search-input::placeholder{color:rgba(40,40,40,.6)}
+    .search-input::placeholder{color:rgba(27,31,54,.55)}
+    body.dark-mode .search-input::placeholder{color:rgba(255,255,255,.65)}
+    .search-hint{margin:10px 0 0; font-size:.92em; color:var(--muted)}
 
-    /* Cards — stronger frosted glass */
-    .cards-container{display:grid; grid-template-columns:1fr; gap:26px; margin-bottom:46px}
+    .cards-shell{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px; margin:32px 0 38px;
+    }
     .card{
-      border-radius:24px; overflow:hidden; border:1px solid var(--border);
-      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
-      backdrop-filter: blur(calc(var(--blur) + 2px));
-      box-shadow: var(--shadow); transform: translateZ(0);
+      border-radius:26px; border:1px solid var(--border);
+      background:var(--glass); backdrop-filter:blur(20px);
+      box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
     }
-    .card:hover{transform: translateY(-8px)}
-    .card-image{width:100%; height:220px; object-fit:cover}
-    .card-content{padding:22px; text-align:center}
-    .card-content h2{margin:0 0 10px; color:var(--accent)}
-    .card-content p{margin:0 0 14px}
+    .card-figure{position:relative; overflow:hidden}
+    .card-figure img{width:100%; height:190px; object-fit:cover; display:block; transform:scale(1.02)}
+    .card-tag{
+      position:absolute; top:14px; right:14px;
+      padding:6px 14px; border-radius:999px;
+      background:rgba(0,0,0,.6); color:#fff; font-weight:600; font-size:.85em;
+      letter-spacing:.05em;
+    }
+    body:not(.dark-mode) .card-tag{background:rgba(0,0,0,.4)}
+    .card-content{padding:20px; flex:1; display:flex; flex-direction:column; text-align:center}
+    .card-content h2{margin:0 0 10px; color:var(--text); font-size:1.4em}
+    .card-content p{margin:0 0 18px; color:var(--muted); line-height:1.6; flex:1}
     .card-button{
-      display:inline-block; padding:12px 34px; border-radius:999px; border:1px solid var(--border);
-      background: linear-gradient(135deg,rgba(40,85,255,.9),rgba(35,50,255,.9));
-      color:#fff; font-weight:700; text-decoration:none; box-shadow: var(--shadow); cursor:pointer
+      align-self:center; padding:12px 36px; border-radius:999px;
+      background:var(--button-grad); color:#fff; font-weight:700;
+      border:none; cursor:pointer; box-shadow:var(--button-shadow); text-decoration:none;
     }
-    .card-button:hover{transform: translateY(-3px)}
+    .card-button:hover{transform:translateY(-3px)}
 
-    footer{
-      border-radius:24px; border:1px solid var(--border);
-      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
-      backdrop-filter: blur(var(--blur)); box-shadow: var(--shadow);
-      padding:28px; text-align:center
+    .foot-card{
+      border-radius:26px; border:1px solid var(--border);
+      background:var(--glass); backdrop-filter:blur(20px);
+      box-shadow:var(--shadow); padding:26px; text-align:center;
+      color:var(--muted); line-height:1.7;
     }
 
-    @media (min-width: 768px){
-      .cards-container{grid-template-columns: repeat(3, 1fr)}
-      header{margin-top:120px}
+    .modal-overlay{
+      position:fixed; inset:0; background:rgba(0,0,0,.72);
+      display:none; align-items:center; justify-content:center; z-index:200;
+      backdrop-filter:blur(10px);
+    }
+    .modal-overlay.active{display:flex}
+    .modal-card{
+      width:min(420px,90%); border-radius:28px;
+      border:1px solid var(--border); background:var(--glass-strong);
+      padding:34px; text-align:center; box-shadow:var(--shadow); backdrop-filter:blur(30px);
+    }
+    .modal-card img{
+      width:160px; height:160px; object-fit:contain;
+      margin-bottom:16px; animation:spin 2.2s linear infinite;
+    }
+    .modal-card h3{margin:0 0 10px; color:var(--text); font-size:1.6em}
+    .modal-card p{margin:0 0 18px; color:var(--muted)}
+    .modal-close{
+      padding:10px 34px; border-radius:999px; border:none;
+      background:linear-gradient(135deg,#ff6b6b,#ee5a6f); color:#fff;
+      font-weight:700; cursor:pointer; box-shadow:0 15px 25px rgba(238,90,111,.35);
     }
 
     @keyframes shimmer{to{background-position:300% center}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media(max-width:600px){
+      .hero-card{padding:28px 22px 36px}
+      .hero-logo{width:120px; top:-28px; right:-22px}
+      .theme-toggle{width:110px; height:52px}
+      .knob{width:40px; height:40px}
+      body.dark-mode .knob{left:calc(110px - 40px - 8px)}
+    }
   </style>
 </head>
-<body>
-
-  <!-- Fixed top-right site logo (renamed) -->
-  <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-fixed" />
-
-  <!-- Smooth toggle with crossfade images and sliding knob -->
+<body class="dark-mode">
+  <!-- Theme toggle -->
   <div class="theme-switch-wrapper">
-    <button id="themeToggle" class="theme-toggle" title="تبديل الوضع" aria-label="تبديل الوضع">
+    <button id="themeToggle" class="theme-toggle" aria-label="تبديل الوضع">
       <div class="theme-track">
-        <img src="light.mode.jpg" alt="وضع ساطع" class="track-light" />
-        <img src="dark.mode.jpg" alt="وضع داكن" class="track-dark" />
+        <img src="light.mode.jpg" alt="الوضع الساطع" class="track-light" />
+        <img src="dark.mode.jpg" alt="الوضع الداكن" class="track-dark" />
       </div>
       <span class="knob" aria-hidden="true"></span>
     </button>
   </div>
 
-  <!-- Background video (clearer) -->
+  <!-- Background video -->
   <div class="video-background">
     <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
   </div>
 
   <canvas id="particles-canvas"></canvas>
 
-  <!-- Modal قيد العمل -->
-  <div class="modal-overlay" id="workingModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.7); backdrop-filter: blur(10px); align-items:center; justify-content:center;">
-    <div class="modal-content" style="max-width:420px; width:90%; text-align:center; border-radius:28px; padding:36px; border:1px solid var(--border); background:linear-gradient(180deg,var(--glass-strong),var(--glass)); backdrop-filter: blur(calc(var(--blur) + 6px)); box-shadow: var(--shadow);">
-      <img src="wait.jpg" alt="قيد العمل" style="width:160px; height:160px; object-fit:contain; margin-bottom:14px; animation: spin 1.8s linear infinite;">
-      <h3 style="margin:0 0 8px; color:var(--accent); font-size:1.6em;">⏳ قيد العمل</h3>
-      <p style="margin:0 0 16px; color:var(--text)">هذا القسم لسه قيد التطوير.</p>
-      <button onclick="closeModal()" style="padding:10px 26px; border-radius:999px; border:1px solid var(--border); background:linear-gradient(135deg,#ff6b6b,#ee5a6f); color:#fff; font-weight:700; cursor:pointer;">حسناً</button>
+  <!-- Modal -->
+  <div class="modal-overlay" id="workingModal">
+    <div class="modal-card">
+      <img src="wait.jpg" alt="قيد العمل">
+      <h3>⏳ قيد العمل</h3>
+      <p>هذا القسم لسه قيد التطوير وهيفتح قريب.</p>
+      <button class="modal-close" onclick="closeModal()">حسناً</button>
     </div>
   </div>
 
   <div class="container">
-    <header>
+    <header class="hero-card">
+      <img src="toplogo1.jpg" alt="شعار حلبسة" class="hero-logo" loading="lazy">
+      <p class="hero-eyebrow">THEBAA • 7LBSAA</p>
       <h1>🌟 موقع حلبسة 🌟</h1>
-      <div class="brand-tagline">
-        المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة وتحديات كرة القدم<br />
-        <strong>7LBSAA • 7LBSAA1</strong>
-      </div>
+      <p class="hero-desc">
+        المنصة العربية الأولى للتمبلتات والميمز، دليلك لأقوى مدرسين الثانوية العامة، وأحدث التحديات الترفيهية المخصصة لجمهور 7LBSAA.
+      </p>
+      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill" title="تواصل معنا">
+        <span>تواصل معنا</span>
+        <span class="pill-icon"><img src="kiki.jpg" alt="تواصل"></span>
+      </a>
 
-      <div class="contact-area">
-        <span class="label">للتواصل</span>
-        <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn" title="تواصل معنا">
-          <img src="kiki.jpg" alt="تواصل معنا" />
-        </a>
-      </div>
-
-      <div class="search-container">
+      <div class="search-area">
         <div class="search-input-container">
           <input id="searchInput" class="search-input" type="text" placeholder="ابحث عن تمبلت، مدرس، أو تحدي..." />
         </div>
+        <p class="search-hint">استكشف كل ما تحتاجه بضغطة واحدة.</p>
       </div>
     </header>
 
-    <div class="cards-container">
-      <div class="card" data-category="ميمز تمبلتات مضحكة">
-        <img src="images/logo3.jpg" loading="lazy" alt="تمبلتات ميمز" class="card-image" />
-        <div class="card-content">
-          <h2>التمبلتات والميمز</h2>
-          <p>أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية.</p>
-          <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="card-button">دخول 😂</a>
+    <section class="cards-shell">
+      <article class="card" data-category="تحدي كرة قدم معلومات">
+        <div class="card-figure">
+          <img src="football.7lbsaa.jpg" alt="تحدي كرة القدم" loading="lazy">
+          <span class="card-tag">QUIZ</span>
         </div>
-      </div>
-
-      <div class="card" data-category="تعليم مدرسين ثانوية عامة">
-        <img src="images/logo2.jpg" loading="lazy" alt="مدرسين الثانوية" class="card-image" />
-        <div class="card-content">
-          <h2>مدرسين الثانوية</h2>
-          <p>دليلك الشامل لأفضل مدرسي الثانوية العامة في مصر.</p>
-          <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="card-button">دخول 🎓</a>
-        </div>
-      </div>
-
-      <div class="card" data-category="تحدي كرة قدم معلومات">
-        <img src="football.7lbsaa.jpg" loading="lazy" alt="تحدي كرة القدم" class="card-image" />
         <div class="card-content">
           <h2>تحدي معلومات كرة القدم</h2>
-          <p>اختبر معلوماتك في كرة القدم وتحدى أصحابك!</p>
-          <button class="card-button" onclick="showWorkingModal()">دخول ⚽</button>
+          <p>جاوب على أسئلة سريعة واختبر ثقافتك الكروية وسط أصحابك.</p>
+          <button class="card-button" type="button" onclick="showWorkingModal()">دخول ⚽</button>
         </div>
-      </div>
-    </div>
+      </article>
 
-    <footer>
-      <div style="text-align:right; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:12px;">
-        <h3 style="color:var(--accent); margin:0 0 6px;">عن موقع حلبسة (7LBSAA):</h3>
-        <p style="margin:0; line-height:1.6;">المنصة الأكبر التي تجمع بين الترفيه والتعليم لخدمة الشباب العربي.</p>
-      </div>
-      <p><strong>جميع الحقوق محفوظة © موقع حلبسة الرسمي • 7LBSAA</strong></p>
+      <article class="card" data-category="تعليم مدرسين ثانوية عامة">
+        <div class="card-figure">
+          <img src="images/logo2.jpg" alt="مدرسي الثانوية" loading="lazy">
+          <span class="card-tag">GUIDE</span>
+        </div>
+        <div class="card-content">
+          <h2>مدرسين الثانوية</h2>
+          <p>اسكتشف قوائمنا المحدثة لأفضل المدرسين وأشهر المنصات التعليمية.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="card-button">دخول 🎓</a>
+        </div>
+      </article>
+
+      <article class="card" data-category="ميمز تمبلتات مضحكة">
+        <div class="card-figure">
+          <img src="images/logo3.jpg" alt="تمبلتات وميمز" loading="lazy">
+          <span class="card-tag">MEMES</span>
+        </div>
+        <div class="card-content">
+          <h2>التمبلتات والميمز</h2>
+          <p>أكبر مكتبة تمبلتات مصرية بجودة عالية وابتكارات حصرية لفريق حلبسة.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="card-button">دخول 😂</a>
+        </div>
+      </article>
+    </section>
+
+    <footer class="foot-card">
+      <h3 style="margin-top:0; color:var(--text);">عن موقع حلبسة (7LBSAA):</h3>
+      <p>منصة تجمع بين الترفيه والتعليم في مكان واحد لخدمة المجتمع العربي الرقمي. جميع الحقوق محفوظة © موقع حلبسة الرسمي • 7LBSAA.</p>
     </footer>
   </div>
 
-  <style>
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  </style>
-
   <script>
-    // Theme state
-    const toggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if(saved === 'dark'){ document.body.classList.add('dark-mode'); }
+    // Theme handling
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIconLight = document.querySelector('.track-light');
+    const themeIconDark = document.querySelector('.track-dark');
 
-    toggle.addEventListener('click', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light'){
+      document.body.classList.remove('dark-mode');
+    } else {
+      document.body.classList.add('dark-mode');
+    }
+
+    themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      const mode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+      localStorage.setItem('theme', mode);
     });
 
-    // Modal "قيد العمل"
-    function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
-    function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
-    document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
+    // Modal controls
+    function showWorkingModal(){
+      document.getElementById('workingModal').classList.add('active');
+    }
+    function closeModal(){
+      document.getElementById('workingModal').classList.remove('active');
+    }
+    document.getElementById('workingModal').addEventListener('click', (e)=>{
+      if(e.target.id === 'workingModal'){ closeModal(); }
+    });
 
     // Search filter
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.card');
     searchInput.addEventListener('input', (e)=>{
-      const q = e.target.value.toLowerCase().trim();
+      const query = e.target.value.toLowerCase().trim();
       cards.forEach(card=>{
-        const c = (card.dataset.category || '').toLowerCase();
-        card.style.display = c.includes(q) ? 'block' : 'none';
+        const category = (card.dataset.category || '').toLowerCase();
+        card.style.display = category.includes(query) ? 'flex' : 'none';
       });
     });
 
-    // Particles (slightly brighter for clarity)
+    // Particles
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
-    addEventListener('resize', resize); resize();
+    window.addEventListener('resize', resize); resize();
 
     const particles = Array.from({length:70}, ()=>({
       x: Math.random()*canvas.width,
       y: Math.random()*canvas.height,
-      s: Math.random()*1.8+0.6,
-      vy: Math.random()*0.45+0.12,
-      a: Math.random()*0.35+0.45
+      r: Math.random()*1.5 + 0.5,
+      vy: Math.random()*0.4 + 0.1,
+      alpha: Math.random()*0.4 + 0.4
     }));
 
-    function tick(){
+    function animate(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       particles.forEach(p=>{
-        p.y += p.vy; if(p.y>canvas.height) p.y = -10;
-        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+        p.y += p.vy;
+        if(p.y > canvas.height) p.y = -10;
+        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
       });
-      requestAnimationFrame(tick);
+      requestAnimationFrame(animate);
     }
-    tick();
+    animate();
+
+    window.showWorkingModal = showWorkingModal;
+    window.closeModal = closeModal;
   </script>
 </body>
 </html>
-Scroll down
 
