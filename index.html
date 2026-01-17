@@ -22,25 +22,25 @@
     <style>
         :root {
             --primary-bg: linear-gradient(135deg, #6258e6 0%, #1c34bb 100%);
-            --card-bg: rgba(255, 245, 230, 0.65);
+            --card-bg: rgba(255, 245, 230, 0.5); /* Increased transparency for more glass effect */
             --text-color: #333;
-            --footer-bg: rgba(255, 255, 255, 0.75);
+            --footer-bg: rgba(255, 255, 255, 0.6); /* Increased transparency */
             --header-text: #fff;
             --accent-color: #6258e6;
-            --glass-blur: 12px;
-            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-blur: 14px; /* Slightly more blur */
+            --glass-border: rgba(255, 255, 255, 0.3); /* Softer border */
         }
         body.dark-mode {
             --primary-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0f1b 100%);
-            --card-bg: rgba(30, 30, 45, 0.65);
+            --card-bg: rgba(30, 30, 45, 0.5); /* Increased transparency */
             --text-color: #e0e0e0;
-            --footer-bg: rgba(30, 30, 45, 0.85);
+            --footer-bg: rgba(30, 30, 45, 0.7); /* Increased transparency */
             --header-text: #ffd700;
             --accent-color: #ffd700;
-            --glass-blur: 14px;
-            --glass-border: rgba(255, 215, 0, 0.15);
+            --glass-blur: 16px; /* Slightly more blur */
+            --glass-border: rgba(255, 215, 0, 0.2); /* Softer border */
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease-in-out; } /* Smooth transitions for everything */
         body { 
              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
              min-height: 100vh; 
@@ -71,10 +71,10 @@
             width: auto;
             height: auto;
             object-fit: cover;
-            filter: brightness(0.6);
+            filter: brightness(0.6); /* Ensure video is clear but not overpowering */
         }
 
-        /* زر تبديل الوضع الداكن - Toggle Switch */
+        /* زر تبديل الوضع الداكن - Dynamic Toggle Switch */
         .theme-switch-wrapper {
             position: fixed;
             top: 20px;
@@ -82,32 +82,37 @@
             z-index: 100;
         }
         .theme-toggle-btn {
-            width: 100px;
-            height: 50px;
+            position: relative;
+            width: 100px; /* Width of light.mode.jpg / dark.mode.jpg */
+            height: 50px; /* Height of light.mode.jpg / dark.mode.jpg */
             border: none;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.15);
+            background: transparent; /* No background, images will provide it */
             backdrop-filter: blur(var(--glass-blur));
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden; /* Hide parts of image not in view */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
                         inset 0 2px 10px rgba(0, 0, 0, 0.1);
             border: 2px solid var(--glass-border);
-            transition: all 0.4s ease;
-            overflow: hidden;
+            transition: all 0.4s ease-in-out;
             padding: 0;
         }
         .theme-toggle-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
         }
-        .theme-toggle-btn img {
+        .theme-toggle-btn .toggle-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 48px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out; /* Smooth cross-fade */
+        }
+        .theme-toggle-btn .toggle-image.active {
+            opacity: 1;
         }
 
         #particles-canvas { 
@@ -137,31 +142,39 @@
             border: 1px solid var(--glass-border);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             position: relative;
+            padding-top: 120px; /* Add space for top-right section */
         }
 
         /* صورة الموقع والتواصل على اليمين */
-        .top-right-section {
+        .top-right-container {
             position: absolute;
             top: 20px;
             right: 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 15px; /* Space between logo and contact */
         }
         .top-logo {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
             border: 3px solid var(--glass-border);
+            transition: all 0.3s ease-in-out;
+        }
+        .top-logo:hover {
+            transform: scale(1.05) rotate(5deg);
         }
         .contact-section {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: center; /* Align text and button horizontally */
             gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: 50px;
+            padding: 5px 15px 5px 5px; /* Padding for glass effect */
+            border: 1px solid var(--glass-border);
         }
         .contact-label {
             color: rgba(255, 255, 255, 0.9);
@@ -172,28 +185,28 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller contact button */
+            height: 50px;
             background: linear-gradient(135deg, rgba(255, 138, 0, 0.8), rgba(229, 46, 113, 0.8));
             border-radius: 50%;
             cursor: pointer;
             border: none;
             padding: 0;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(229, 46, 113, 0.4);
+            box-shadow: 0 4px 15px rgba(229, 46, 113, 0.3);
             backdrop-filter: blur(var(--glass-blur));
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
         }
         .contact-btn:hover {
-            transform: scale(1.12) translateY(-4px);
-            box-shadow: 0 10px 30px rgba(229, 46, 113, 0.6);
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.5);
         }
         .contact-btn img {
-            width: 38px;
-            height: 38px;
+            width: 32px; /* Smaller image */
+            height: 32px;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
         }
 
         header h1 { 
@@ -220,7 +233,7 @@
             padding: 0 10px; 
         }
         .search-input-container { 
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2); /* Increased transparency */
             border-radius: 50px; 
             padding: 8px; 
             display: flex; 
@@ -329,8 +342,8 @@
             display: flex;
         }
         .modal-content {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            background: var(--card-bg); /* Use glass effect */
+            backdrop-filter: blur(var(--glass-blur));
             border-radius: 30px;
             padding: 40px;
             text-align: center;
@@ -390,13 +403,22 @@
             header h1 { font-size: 3.8em; }
             .cards-container { grid-template-columns: repeat(3, 1fr); gap: 30px; }
             body { padding: 40px; }
-            .top-right-section {
+            .top-right-container {
                 flex-direction: row;
-                gap: 20px;
+                align-items: center;
+                top: 30px; /* Adjust top position for large screens */
             }
             .top-logo {
                 width: 100px;
                 height: 100px;
+            }
+            .contact-btn {
+                width: 60px;
+                height: 60px;
+            }
+            .contact-btn img {
+                width: 38px;
+                height: 38px;
             }
             .theme-toggle-btn {
                 width: 120px;
@@ -413,7 +435,8 @@
     <!-- زر تبديل الوضع -->
     <div class="theme-switch-wrapper">
         <button class="theme-toggle-btn" id="themeToggle" title="تبديل الوضع">
-            <img id="themeIcon" src="light.mode.jpg" alt="تبديل الوضع">
+            <img class="toggle-image active" id="lightModeImg" src="light.mode.jpg" alt="الوضع الساطع">
+            <img class="toggle-image" id="darkModeImg" src="dark.mode.jpg" alt="الوضع الداكن">
         </button>
     </div>
 
@@ -437,8 +460,8 @@
     <div class="container">
         <header>
             <!-- صورة الموقع والتواصل على اليمين -->
-            <div class="top-right-section">
-                <img src="toplogo.jpg" alt="شعار حلبسة" class="top-logo" loading="lazy">
+            <div class="top-right-container">
+                <img src="toplogo1.jpg" alt="شعار حلبسة" class="top-logo" loading="lazy">
                 <div class="contact-section">
                     <span class="contact-label">للتواصل</span>
                     <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn" title="تواصل معنا">
@@ -501,14 +524,17 @@
     <script>
         // تفعيل زر الوضع الداكن
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
+        const lightModeImg = document.getElementById('lightModeImg');
+        const darkModeImg = document.getElementById('darkModeImg');
         
         // تحميل الوضع المحفوظ
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            themeIcon.src = 'dark.mode.jpg';
+            lightModeImg.classList.remove('active');
+            darkModeImg.classList.add('active');
         } else {
-            themeIcon.src = 'light.mode.jpg';
+            lightModeImg.classList.add('active');
+            darkModeImg.classList.remove('active');
         }
         
         themeToggle.addEventListener('click', () => {
@@ -516,10 +542,12 @@
             
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
-                themeIcon.src = 'dark.mode.jpg';
+                lightModeImg.classList.remove('active');
+                darkModeImg.classList.add('active');
             } else {
                 localStorage.setItem('theme', 'light');
-                themeIcon.src = 'light.mode.jpg';
+                lightModeImg.classList.add('active');
+                darkModeImg.classList.remove('active');
             }
         });
 
@@ -589,3 +617,4 @@
     </script>
 </body>
 </html>
+
