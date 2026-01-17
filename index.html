@@ -8,6 +8,7 @@
     <meta name="description" content="موقع حلبسة: أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية ودليلك الشامل لأفضل مدرسي الثانوية العامة وخلفيات الموبايل.">
     
     <link rel="icon" href="logo.png" type="image/png" sizes="96x96">
+    <link rel="shortcut icon" type="image/png" href="logox.jpg">
     <link rel="apple-touch-icon" href="logo.png">
     
     <meta property="og:type" content="website">
@@ -66,7 +67,7 @@
             filter: brightness(0.6);
         }
 
-        /* تنسيق زر الوضع الداكن - زر واحد يتحول */
+        /* تنسيق زر الوضع الداكن */
         .theme-switch-wrapper {
             position: fixed;
             top: 20px;
@@ -115,6 +116,15 @@
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
         header { text-align: center; color: white; padding: 20px 0; margin-bottom: 20px; }
+        
+        /* تنسيق الشعار العلوي الجديد */
+        .top-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4));
+        }
+
         header h1 { 
              font-size: 2.5em;
              margin-bottom: 15px; 
@@ -127,7 +137,7 @@
         }
         .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; line-height: 1.6; }
         
-        /* زر التواصل احترافي */
+        /* زر التواصل المحسّن */
         .contact-btn-wrapper {
             display: inline-block;
             margin-bottom: 30px;
@@ -303,10 +313,10 @@
 </head>
 <body>
     
-    <!-- زر تبديل الوضع الداكن - يتحول عند الضغط -->
+    <!-- زر تبديل الوضع الداكن -->
     <div class="theme-switch-wrapper">
         <button class="theme-toggle-btn" id="themeToggle" title="تبديل الوضع">
-            <img id="themeIcon" src="mode2.jpg" alt="تبديل الوضع">
+            <img id="themeIcon" src="mode.jpg" alt="تبديل الوضع">
         </button>
     </div>
 
@@ -319,6 +329,7 @@
 
     <div class="container">
         <header>
+            <img src="toplogo.jpg" alt="شعار حلبسة" class="top-logo">
             <h1>🌟 موقع حلبسة 🌟</h1>
             <div class="brand-tagline">
                 المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة<br>
@@ -376,28 +387,28 @@
     </div>
 
     <script>
-        // تفعيل زر الوضع الداكن - يتحول عند الضغط
+        // تفعيل زر الوضع الداكن
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
         
         // التحقق من الوضع المحفوظ
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            themeIcon.src = 'mode2_dark.jpg'; // صورة الوضع الداكن
+            themeIcon.src = 'mode_dark.jpg'; // صورة الوضع الداكن
         } else {
-            themeIcon.src = 'mode2.jpg'; // صورة الوضع الفاتح
+            themeIcon.src = 'mode.jpg'; // صورة الوضع الفاتح
         }
         
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             
-            // حفظ الإعدادات
+            // حفظ الإعدادات وتغيير الصورة
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
-                themeIcon.src = 'mode2_dark.jpg'; // الصورة عند الوضع الداكن
+                themeIcon.src = 'mode_dark.jpg'; // الصورة عند الوضع الداكن
             } else {
                 localStorage.setItem('theme', 'light');
-                themeIcon.src = 'mode2.jpg'; // الصورة عند الوضع الفاتح
+                themeIcon.src = 'mode.jpg'; // الصورة عند الوضع الفاتح
             }
         });
 
@@ -454,4 +465,4 @@
         animate();
     </script>
 </body>
-</html>
+</html>Scroll down
