@@ -3,310 +3,288 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>موقع حلبسة | المنصة الرسمية لـ 7LBSAA</title>
-  <meta name="description" content="موقع حلبسة: تمبلتات وميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم." />
+  <title>موقع حلبسة | UI Design</title>
+  <meta name="description" content="موقع حلبسة: واجهة مستخدم جديدة، تمبلتات وميمز، مدرسين ثانوية، وتحديات." />
   
-  <link rel="icon" href="logo.png" type="image/png" sizes="96x96" />
-  <link rel="apple-touch-icon" href="logo.png" />
-  <link rel="shortcut icon" type="image/png" href="logox.jpg" />
+  <link rel="icon" href="logo.png" type="image/png" />
 
   <style>
     :root {
-      /* الألوان والمتغيرات */
-      --primary-light: #6e63ff;
-      --primary-dark: #ffd54d;
-      --text-light: #1f2533;
-      --text-dark: #e9ecf1;
+      /* UI Colors Palette */
+      --primary-grad: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+      --accent-grad: linear-gradient(135deg, #f6c23e 0%, #e0a800 100%);
       
-      /* إعدادات الزجاج */
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --glass-blur: 16px;
-      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      --text-on-dark: #f8f9fc;
+      --text-on-light: #2c3e50;
+      
+      --ui-dark-glass: rgba(30, 30, 45, 0.85);
+      --ui-light-glass: rgba(255, 255, 255, 0.9);
+      --ui-border: 1px solid rgba(255, 255, 255, 0.1);
+      --ui-radius: 20px;
+      --ui-shadow: 0 10px 30px rgba(0,0,0,0.25);
 
-      /* أبعاد زر التبديل */
-      --toggle-w: 90px;
-      --toggle-h: 40px;
-      --knob-size: 32px;
+      /* Toggle Switch Vars */
+      --toggle-w: 80px;
+      --toggle-h: 36px;
+      --knob-size: 28px;
     }
 
-    /* الوضع الافتراضي (فاتح) - لكن سنعتمد على الفيديو كخلفية */
     body {
       margin: 0; padding: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: var(--text-dark); /* النص فاتح ليناسب الفيديو */
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text-on-dark);
       overflow-x: hidden;
       min-height: 100vh;
-      transition: color 0.5s ease;
+      transition: color 0.3s ease;
     }
-
-    /* --- خلفية الفيديو (الأنمي) --- */
+    
+    /* --- خلفية الفيديو --- */
     .video-background {
       position: fixed; inset: 0; z-index: -5;
       overflow: hidden;
-      background: #000; /* لون احتياطي */
+      background: #1a1a2e;
     }
     .bg-video {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       min-width: 100%; min-height: 100%;
       object-fit: cover;
-      /* جعل الفيديو واضحاً */
-      filter: brightness(0.85) contrast(1.1);
-      transition: filter 0.5s ease;
+      filter: brightness(0.8) saturate(1.1); /* تعديل بسيط لتباين الـ UI */
+      transition: filter 0.4s ease;
     }
     
-    /* عند تفعيل الوضع الفاتح (اختياري: يمكن تفتيح الفيديو قليلاً أو تركه كما هو) */
-    body.light-mode .bg-video {
-      filter: brightness(1.1) contrast(1);
-    }
-    body.light-mode {
-      color: var(--text-light); /* نصوص داكنة لو الخلفية فاتحة */
-    }
+    /* وضع النهار */
+    body.light-mode { color: var(--text-on-light); }
+    body.light-mode .bg-video { filter: brightness(1.1) saturate(1); }
 
-    /* --- الشعار في أعلى اليمين --- */
-    .site-brand-fixed {
+    /* --- الشعار العائم (بدون مربع) --- */
+    .site-brand-floating {
       position: fixed;
-      top: 15px; 
-      right: 15px;
+      top: 25px;
+      right: 25px;
       z-index: 1000;
-      width: 85px; 
-      height: 85px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      /* إزالة الخلفيات والحدود وجعله عائم مباشرة */
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .site-brand-fixed:hover {
-      transform: scale(1.05) rotate(2deg);
+    .site-brand-floating:hover {
+      transform: scale(1.1) rotate(5deg);
     }
 
-    /* --- زر التحويل (Toggle) المتحرك --- */
+    /* --- زر التحويل UI (بدون صور) --- */
     .theme-switch-wrapper {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
+      position: fixed; top: 25px; left: 25px; z-index: 1000;
     }
-    .theme-toggle {
+    .theme-toggle-ui {
       position: relative;
       width: var(--toggle-w);
       height: var(--toggle-h);
       border-radius: 50px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
+      /* خلفية المسار للوضع الداكن */
+      background: rgba(20, 20, 35, 0.6);
+      border: 2px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(10px);
       cursor: pointer;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      transition: all 0.4s ease;
+      box-shadow: inner 0 2px 5px rgba(0,0,0,0.2);
     }
-    .theme-toggle:hover { transform: scale(1.05); }
-
-    /* الصور داخل الزر */
-    .toggle-bg {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: opacity 0.6s ease;
+    
+    /* خلفية المسار للوضع الفاتح */
+    body.light-mode .theme-toggle-ui {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(0,0,0,0.05);
     }
-    /* التحكم في ظهور الصور */
-    .toggle-bg.light-img { opacity: 0; } /* مخفية في الوضع الداكن الافتراضي */
-    .toggle-bg.dark-img { opacity: 1; }
 
-    /* عند تفعيل الوضع الفاتح */
-    body.light-mode .toggle-bg.light-img { opacity: 1; }
-    body.light-mode .toggle-bg.dark-img { opacity: 0; }
-
-    /* الكرة المتحركة (Knob) */
+    /* الكرة المتحركة */
     .knob {
       position: absolute;
       top: 50%;
-      left: 4px; /* الوضع الداكن (اليسار) */
+      left: 4px;
       width: var(--knob-size);
       height: var(--knob-size);
       border-radius: 50%;
-      background: #fff;
+      /* لون الكرة */
+      background: var(--text-on-dark);
       transform: translateY(-50%);
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      transition: left 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* حركة نابضة */
-      z-index: 2;
+      transition: left 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), background 0.3s;
     }
-    /* تحريك الكرة لليمين في الوضع الفاتح */
+    /* تحريك الكرة وتغيير لونها في الوضع الفاتح */
     body.light-mode .knob {
-      left: calc(var(--toggle-w) - var(--knob-size) - 4px);
+      left: calc(var(--toggle-w) - var(--knob-size) - 6px);
+      background: var(--primary-grad); /* لون مميز للكرة في النهار */
     }
 
-    /* --- الحاويات وتنسيق الصفحة --- */
+    /* --- تخطيط الصفحة UI --- */
     .container {
-      max-width: 1200px;
-      margin: 120px auto 40px; /* مسافة من الأعلى عشان الشعار */
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
+      max-width: 1100px;
+      margin: 130px auto 50px;
+      padding: 0 24px;
+      position: relative; z-index: 1;
     }
 
-    /* الهيدر الزجاجي */
+    /* الهيدر بتصميم UI */
     header {
       text-align: center;
-      padding: 30px;
-      border-radius: 25px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-      backdrop-filter: blur(var(--glass-blur));
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
-      margin-bottom: 40px;
+      padding: 40px 30px;
+      /* خلفية UI نظيفة */
+      background: var(--ui-dark-glass);
+      border-radius: var(--ui-radius);
+      border: var(--ui-border);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--ui-shadow);
+      margin-bottom: 50px;
+    }
+    body.light-mode header {
+      background: var(--ui-light-glass);
+      border: 1px solid rgba(0,0,0,0.05);
     }
 
     header h1 {
-      margin: 0;
-      font-size: 2.5em;
-      background: linear-gradient(90deg, #fff, #ffd54d, #fff);
-      background-size: 200%;
+      margin: 0 0 10px;
+      font-size: 2.8em;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: var(--accent-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shimmer 3s infinite linear;
     }
-    
     body.light-mode header h1 {
-       background: linear-gradient(90deg, #1c34bb, #6e63ff, #1c34bb);
-       -webkit-background-clip: text;
-       -webkit-text-fill-color: transparent;
+      background: var(--primary-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
-      margin-top: 10px;
-      font-size: 1.1em;
-      color: rgba(255,255,255,0.9);
+      font-size: 1.15em; opacity: 0.85; font-weight: 500;
     }
-    body.light-mode .subtitle { color: rgba(0,0,0,0.8); }
 
-    /* زر تواصل معنا */
-    .contact-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-top: 20px;
-      padding: 10px 25px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid var(--glass-border);
+    /* زر التواصل UI Style */
+    .contact-pill-ui {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 25px;
+      padding: 12px 28px;
+      background: var(--primary-grad);
       border-radius: 50px;
-      color: inherit; text-decoration: none;
-      font-weight: bold;
-      transition: .3s;
+      color: white; text-decoration: none;
+      font-weight: 700; font-size: 0.95em;
+      box-shadow: 0 8px 20px rgba(34, 74, 190, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .contact-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-3px); }
-    .contact-btn img { width: 30px; height: 30px; border-radius: 50%; }
+    .contact-pill-ui:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(34, 74, 190, 0.5);
+    }
+    .contact-pill-ui img { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
 
-    /* --- شبكة البطاقات الزجاجية --- */
+    /* --- بطاقات UI --- */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
     }
 
-    .card {
+    .ui-card {
       position: relative;
-      border-radius: 24px;
+      border-radius: var(--ui-radius);
       overflow: hidden;
-      /* الزجاج الشفاف */
-      background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: var(--ui-dark-glass);
+      border: var(--ui-border);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--ui-shadow);
+      transition: all 0.3s ease;
     }
-    
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      border-color: rgba(255,255,255,0.4);
+    body.light-mode .ui-card {
+        background: var(--ui-light-glass);
+        border: 1px solid rgba(0,0,0,0.08);
     }
 
-    /* تحسين تباين البطاقات في الوضع الفاتح */
-    body.light-mode .card {
-      background: linear-gradient(145deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
-      border: 1px solid rgba(255,255,255,0.6);
-      color: #333;
+    .ui-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     }
 
-    .card img {
+    .card-img-top {
       width: 100%;
-      height: 200px;
+      height: 210px;
       object-fit: cover;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
-    .card-body { padding: 20px; text-align: center; }
-    .card h2 { margin: 0 0 10px; font-size: 1.5em; color: var(--primary-dark); }
-    body.light-mode .card h2 { color: var(--primary-light); }
+    .card-body { padding: 24px; }
     
-    .card p { font-size: 0.95em; opacity: 0.9; margin-bottom: 20px; }
-
-    .card-btn {
-      display: inline-block;
-      padding: 12px 30px;
-      background: linear-gradient(90deg, #2555ff, #2f81ff);
+    .card-body h2 {
+      margin: 0 0 12px;
+      font-size: 1.4em; font-weight: 700;
       color: #fff;
-      border-radius: 50px;
+    }
+    body.light-mode .card-body h2 { color: #2c3e50; }
+
+    .card-body p {
+      margin: 0 0 24px;
+      font-size: 0.95em; opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    /* أزرار البطاقات UI */
+    .ui-btn {
+      display: block; width: 100%;
+      padding: 14px;
+      text-align: center;
+      background: var(--primary-grad);
+      color: white;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(37, 85, 255, 0.4);
-      transition: .3s;
+      font-weight: 700;
+      border: none; cursor: pointer;
+      transition: 0.3s;
     }
-    .card-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37, 85, 255, 0.6);
-    }
+    .ui-btn.accent { background: var(--accent-grad); color: #1a1a2e; }
+    .ui-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
 
     /* الفوتر */
     footer {
-      margin-top: 50px;
+      margin-top: 60px;
       text-align: center;
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(5px);
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9em;
+      padding: 25px;
+      background: var(--ui-dark-glass);
+      backdrop-filter: blur(10px);
+      border-radius: var(--ui-radius);
+      font-weight: 500;
+      opacity: 0.8;
     }
-    body.light-mode footer { background: rgba(255,255,255,0.5); color: #333; }
+    body.light-mode footer { background: var(--ui-light-glass); }
 
-    /* Modal (قيد العمل) */
+    /* Modal UI */
     .modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 2000;
-      background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(15px);
       justify-content: center; align-items: center;
     }
-    .modal-content {
-      background: rgba(20, 20, 30, 0.9);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 30px; border-radius: 20px;
-      text-align: center; max-width: 400px; width: 90%;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      color: #fff;
+    .modal-content-ui {
+      background: var(--ui-dark-glass);
+      border: var(--ui-border);
+      padding: 40px; border-radius: 30px;
+      text-align: center; max-width: 420px; width: 90%;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      color: var(--text-on-dark);
     }
-    .modal-content img { width: 120px; margin-bottom: 15px; animation: spin 2s linear infinite; }
-    .close-modal {
-      background: #ff5e57; color: white; border: none;
-      padding: 10px 25px; border-radius: 20px;
-      cursor: pointer; margin-top: 15px; font-weight: bold;
-    }
+    body.light-mode .modal-content-ui { background: var(--ui-light-glass); color: var(--text-on-light); }
 
-    @keyframes shimmer { 0% {background-position: -200%} 100% {background-position: 200%} }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .modal-content-ui img { width: 140px; margin-bottom: 20px; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-15px);} }
 
   </style>
 </head>
 <body>
 
-  <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-fixed" />
+  <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-floating" />
 
   <div class="theme-switch-wrapper">
-    <div class="theme-toggle" id="themeToggle">
-      <img src="light.mode.jpg" class="toggle-bg light-img" alt="Light" />
-      <img src="dark.mode.jpg" class="toggle-bg dark-img" alt="Dark" />
+    <div class="theme-toggle-ui" id="themeToggle">
       <div class="knob"></div>
     </div>
   </div>
@@ -316,89 +294,76 @@
   </div>
 
   <div class="modal-overlay" id="workingModal">
-    <div class="modal-content">
-      <img src="wait.jpg" alt="Loading" />
-      <h3>قيد العمل ⏳</h3>
-      <p>جاري تجهيز هذا القسم ليليق بكم!</p>
-      <button class="close-modal" onclick="closeModal()">حسناً</button>
+    <div class="modal-content-ui">
+      <img src="wait.jpg" alt="Loading" style="border-radius: 20px;">
+      <h2>قريباً! 🚀</h2>
+      <p>نعمل بجد لتجهيز هذا القسم بأفضل شكل.</p>
+      <button class="ui-btn accent" onclick="closeModal()">حسناً، فهمت</button>
     </div>
   </div>
 
   <div class="container">
     <header>
-      <h1>☀️ موقع حلبسة ☀️</h1>
-      <p class="subtitle">المنصة العربية الأولى للميمز، طلاب الثانوية، وتحديات كرة القدم</p>
+      <h1>موقع حلبسة</h1>
+      <p class="subtitle">منصتك الأولى للميمز، التعليم الممتع، وتحديات الكرة.</p>
       
-      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn">
+      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill-ui">
         <img src="kiki.jpg" alt="icon">
-        تواصل معنا
+        تواصل معنا الآن
       </a>
     </header>
 
     <div class="cards-grid">
-      <div class="card">
-        <img src="football.7lbsaa.jpg" alt="تحدي كرة القدم" loading="lazy">
+      <div class="ui-card">
+        <img src="football.7lbsaa.jpg" class="card-img-top" alt="تحدي كرة القدم" loading="lazy">
         <div class="card-body">
-          <h2>تحدي الكورة</h2>
-          <p>اختبر معلوماتك الكروية وتحدى أصحابك في أقوى المسابقات.</p>
-          <button class="card-btn" onclick="openModal()">دخول ⚽</button>
+          <h2>تحدي الأبطال ⚽</h2>
+          <p>أثبت معلوماتك الكروية وتحدى أصدقائك في مسابقات مباشرة.</p>
+          <button class="ui-btn accent" onclick="openModal()">ابدأ التحدي</button>
         </div>
       </div>
 
-      <div class="card">
-        <img src="images/logo2.jpg" alt="مدرسين ثانوية" loading="lazy">
+      <div class="ui-card">
+        <img src="images/logo2.jpg" class="card-img-top" alt="مدرسين ثانوية" loading="lazy">
         <div class="card-body">
-          <h2>مدرسين الثانوية</h2>
-          <p>دليل شامل لأقوى مدرسي الثانوية العامة في مصر.</p>
-          <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="card-btn">دخول 🎓</a>
+          <h2>نخبة المدرسين 🎓</h2>
+          <p>دليل شامل لأفضل مدرسي الثانوية العامة في مصر.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="ui-btn">تصفح المدرسين</a>
         </div>
       </div>
 
-      <div class="card">
-        <img src="images/logo3.jpg" alt="ميمز وتمبلتات" loading="lazy">
+      <div class="ui-card">
+        <img src="images/logo3.jpg" class="card-img-top" alt="ميمز وتمبلتات" loading="lazy">
         <div class="card-body">
-          <h2>تمبلتات وميمز</h2>
-          <p>أكبر مكتبة تمبلتات ميمز بجودة عالية لصناع المحتوى.</p>
-          <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="card-btn">دخول 😂</a>
+          <h2>ميمز وتمبلتات 😂</h2>
+          <p>مكتبة ضخمة من التمبلتات والميمز المصرية عالية الجودة.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="ui-btn">اضحك الآن</a>
         </div>
       </div>
     </div>
 
     <footer>
-      <p>جميع الحقوق محفوظة © موقع حلبسة الرسمي • 7LBSAA 2024</p>
+      <p>© 2024 موقع حلبسة 7LBSAA • تصميم UI جديد</p>
     </footer>
   </div>
 
   <script>
-    // التحكم في الوضع (داكن/فاتح)
     const toggleBtn = document.getElementById('themeToggle');
     const body = document.body;
 
-    // التحقق من الوضع المحفوظ
     if (localStorage.getItem('theme') === 'light') {
       body.classList.add('light-mode');
     }
 
     toggleBtn.addEventListener('click', () => {
       body.classList.toggle('light-mode');
-      
-      // حفظ الحالة
-      if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-      } else {
-        localStorage.setItem('theme', 'dark');
-      }
+      localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
     });
 
-    // التحكم في الـ Modal
     const modal = document.getElementById('workingModal');
     function openModal() { modal.style.display = 'flex'; }
     function closeModal() { modal.style.display = 'none'; }
-    
-    // إغلاق عند النقر خارج الصندوق
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   </script>
 </body>
 </html>
