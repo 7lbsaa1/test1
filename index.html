@@ -1,620 +1,352 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <title>موقع حلبسة | المنصة الرسمية لـ 7LBSAA</title>
-    <meta name="description" content="موقع حلبسة: أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية ودليلك الشامل لأفضل مدرسي الثانوية العامة وخلفيات الموبايل.">
-    
-    <!-- Favicons -->
-    <link rel="icon" href="logo.png" type="image/png" sizes="96x96">
-    <link rel="apple-touch-icon" href="logo.png">
-    <link rel="shortcut icon" type="image/png" href="logox.jpg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>موقع حلبسة | المنصة الرسمية لـ 7LBSAA</title>
+  <meta name="description" content="موقع حلبسة: أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية ودليلك الشامل لأفضل مدرسي الثانوية العامة وتحديات كرة القدم." />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/">
-    <meta property="og:title" content="موقع حلبسة | المنصة الرسمية لـ 7LBSAA">
-    <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وخلفيات حصرية في مكان واحد.">
-    <meta property="og:image" content="logoshare.png">
+  <!-- Favicons -->
+  <link rel="icon" href="logo.png" type="image/png" sizes="96x96" />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <link rel="shortcut icon" type="image/png" href="logox.jpg" />
 
-    <style>
-        :root {
-            --primary-bg: linear-gradient(135deg, #6258e6 0%, #1c34bb 100%);
-            --card-bg: rgba(255, 245, 230, 0.5); /* Increased transparency for more glass effect */
-            --text-color: #333;
-            --footer-bg: rgba(255, 255, 255, 0.6); /* Increased transparency */
-            --header-text: #fff;
-            --accent-color: #6258e6;
-            --glass-blur: 14px; /* Slightly more blur */
-            --glass-border: rgba(255, 255, 255, 0.3); /* Softer border */
-        }
-        body.dark-mode {
-            --primary-bg: linear-gradient(135deg, #1a1a2e 0%, #0f0f1b 100%);
-            --card-bg: rgba(30, 30, 45, 0.5); /* Increased transparency */
-            --text-color: #e0e0e0;
-            --footer-bg: rgba(30, 30, 45, 0.7); /* Increased transparency */
-            --header-text: #ffd700;
-            --accent-color: #ffd700;
-            --glass-blur: 16px; /* Slightly more blur */
-            --glass-border: rgba(255, 215, 0, 0.2); /* Softer border */
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease-in-out; } /* Smooth transitions for everything */
-        body { 
-             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-             min-height: 100vh; 
-             padding: 15px; 
-             overflow-x: hidden; 
-             position: relative; 
-             color: var(--text-color);
-             background: var(--primary-bg);
-        }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/" />
+  <meta property="og:title" content="موقع حلبسة | المنصة الرسمية لـ 7LBSAA" />
+  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم." />
+  <meta property="og:image" content="logoshare.png" />
 
-        /* خلفية الفيديو */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-        .bg-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            filter: brightness(0.6); /* Ensure video is clear but not overpowering */
-        }
+  <style>
+    :root{
+      --bg-grad: linear-gradient(135deg,#6e63ff 0%,#1c34bb 100%);
+      --text: #222;
+      --accent: #5f7cff;
+      --glass: rgba(255,255,255,.16);
+      --glass-strong: rgba(255,255,255,.22);
+      --blur: 18px;
+      --border: rgba(255,255,255,.35);
+      --shadow: 0 10px 40px rgba(0,0,0,.18);
+      --toggle-w: 128px;
+      --toggle-h: 56px;
+      --knob: 44px;
+    }
+    body.dark-mode{
+      --bg-grad: linear-gradient(135deg,#121428 0%,#0b0e1d 100%);
+      --text: #e8e8e8;
+      --accent: #ffd54d;
+      --glass: rgba(20,24,45,.36);
+      --glass-strong: rgba(20,24,45,.46);
+      --blur: 20px;
+      --border: rgba(255,213,77,.22);
+      --shadow: 0 12px 48px rgba(0,0,0,.35);
+    }
 
-        /* زر تبديل الوضع الداكن - Dynamic Toggle Switch */
-        .theme-switch-wrapper {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-        }
-        .theme-toggle-btn {
-            position: relative;
-            width: 100px; /* Width of light.mode.jpg / dark.mode.jpg */
-            height: 50px; /* Height of light.mode.jpg / dark.mode.jpg */
-            border: none;
-            border-radius: 50px;
-            background: transparent; /* No background, images will provide it */
-            backdrop-filter: blur(var(--glass-blur));
-            cursor: pointer;
-            overflow: hidden; /* Hide parts of image not in view */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
-                        inset 0 2px 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid var(--glass-border);
-            transition: all 0.4s ease-in-out;
-            padding: 0;
-        }
-        .theme-toggle-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-        }
-        .theme-toggle-btn .toggle-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out; /* Smooth cross-fade */
-        }
-        .theme-toggle-btn .toggle-image.active {
-            opacity: 1;
-        }
+    *{box-sizing:border-box;transition:.35s ease}
+    body{
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      min-height:100vh; margin:0; padding:16px 16px 40px;
+      color:var(--text); background:var(--bg-grad);
+      overflow-x:hidden; position:relative;
+    }
 
-        #particles-canvas { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: -1; 
-            pointer-events: none; 
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            position: relative; 
-            z-index: 1; 
-        }
+    /* Background video clearer */
+    .video-background{position:fixed; inset:0; z-index:-2; overflow:hidden}
+    .bg-video{
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      min-width:100%; min-height:100%; object-fit:cover;
+      filter: brightness(.85) contrast(1.05) saturate(1.1);
+    }
 
-        header { 
-            text-align: center; 
-            color: white; 
-            padding: 20px 0; 
-            margin-bottom: 20px; 
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            position: relative;
-            padding-top: 120px; /* Add space for top-right section */
-        }
+    /* Site logo fixed at top-right */
+    .site-brand-fixed{
+      position:fixed; top:14px; right:14px; z-index:110;
+      width:92px; height:92px; border-radius:20px;
+      object-fit:cover;
+      background:var(--glass-strong);
+      border:1px solid var(--border);
+      backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow);
+      padding:8px;
+    }
 
-        /* صورة الموقع والتواصل على اليمين */
-        .top-right-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Space between logo and contact */
-        }
-        .top-logo {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-            border: 3px solid var(--glass-border);
-            transition: all 0.3s ease-in-out;
-        }
-        .top-logo:hover {
-            transform: scale(1.05) rotate(5deg);
-        }
-        .contact-section {
-            display: flex;
-            align-items: center; /* Align text and button horizontally */
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 50px;
-            padding: 5px 15px 5px 5px; /* Padding for glass effect */
-            border: 1px solid var(--glass-border);
-        }
-        .contact-label {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-            font-weight: bold;
-        }
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px; /* Smaller contact button */
-            height: 50px;
-            background: linear-gradient(135deg, rgba(255, 138, 0, 0.8), rgba(229, 46, 113, 0.8));
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-            padding: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(229, 46, 113, 0.3);
-            backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-        }
-        .contact-btn:hover {
-            transform: scale(1.1) translateY(-2px);
-            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.5);
-        }
-        .contact-btn img {
-            width: 32px; /* Smaller image */
-            height: 32px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-        }
+    /* Theme toggle with smooth image crossfade + moving knob */
+    .theme-switch-wrapper{
+      position:fixed; top:16px; left:16px; z-index:110;
+    }
+    .theme-toggle{
+      position:relative; width:var(--toggle-w); height:var(--toggle-h);
+      border-radius:999px; border:1px solid var(--border);
+      background:var(--glass-strong);
+      overflow:hidden; cursor:pointer; outline:none; border:none;
+      backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow);
+      transform-origin:center;
+    }
+    .theme-toggle:hover{ transform: translateY(-2px) scale(1.02) }
+    .theme-toggle:active{ transform: scale(.98) }
 
-        header h1 { 
-            font-size: 2.5em;
-            margin-bottom: 15px; 
-            margin-top: 20px;
-            background: linear-gradient(45deg, #fff, #ffd700, #fff, #ffd700);
-            background-size: 300% auto;
-            -webkit-background-clip: text; 
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        .brand-tagline { 
-            color: rgba(255,255,255,0.9); 
-            margin-bottom: 25px; 
-            line-height: 1.6; 
-        }
+    .theme-track{ position:absolute; inset:0; border-radius:inherit }
+    .track-light, .track-dark{
+      width:100%; height:100%; object-fit:cover; display:block;
+      opacity:1; transition: opacity .45s ease, filter .45s ease;
+      filter: saturate(1) contrast(1);
+    }
+    /* Crossfade images */
+    body:not(.dark-mode) .track-dark{ opacity:0 }
+    body.dark-mode .track-light{ opacity:0 }
 
-        .search-container { 
-            margin: 30px auto; 
-            max-width: 600px; 
-            padding: 0 10px; 
-        }
-        .search-input-container { 
-            background: rgba(255, 255, 255, 0.2); /* Increased transparency */
-            border-radius: 50px; 
-            padding: 8px; 
-            display: flex; 
-            align-items: center; 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1),
-                        inset 0 1px 3px rgba(255,255,255,0.3);
-            backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-        }
-        .search-input { 
-            flex: 1; 
-            border: none; 
-            outline: none; 
-            padding: 14px 25px; 
-            font-size: 1.1em; 
-            background: transparent;
-            color: #fff;
-        }
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
+    /* Moving knob */
+    .knob{
+      position:absolute; top:50%; left:8px;
+      width:var(--knob); height:var(--knob); border-radius:50%;
+      transform: translateY(-50%);
+      background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,.9), rgba(255,255,255,.6) 60%, rgba(255,255,255,.35) 100%);
+      box-shadow:
+        0 6px 18px rgba(0,0,0,.25),
+        inset 0 2px 8px rgba(255,255,255,.45);
+      border:1px solid var(--border);
+      transition: left .45s cubic-bezier(.22,1,.36,1), background .35s ease, box-shadow .35s ease;
+    }
+    body.dark-mode .knob{
+      left: calc(var(--toggle-w) - var(--knob) - 8px);
+      background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,.85), rgba(200,200,255,.35) 60%, rgba(150,160,255,.22) 100%);
+      box-shadow:
+        0 8px 22px rgba(0,0,0,.35),
+        inset 0 2px 10px rgba(255,255,255,.35);
+    }
 
-        .cards-container { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 25px; 
-            margin-bottom: 50px; 
-        }
-        .card { 
-            background: var(--card-bg); 
-            border-radius: 25px; 
-            overflow: hidden; 
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            backdrop-filter: blur(var(--glass-blur));
-        }
-        .card:hover { 
-            transform: translateY(-10px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .card-image { 
-            width: 100%; 
-            height: 220px; 
-            object-fit: cover;
-        }
-        .card-content { 
-            padding: 25px; 
-            text-align: center;
-        }
-        .card-content h2 { 
-            color: var(--accent-color); 
-            margin-bottom: 12px; 
-            font-size: 1.6em;
-        }
-        body.dark-mode .card-content p { 
-            color: #bbb; 
-        }
-        .card-button { 
-            display: inline-block; 
-            padding: 12px 35px; 
-            background: linear-gradient(135deg, rgba(18, 22, 243, 0.9) 0%, rgba(0, 4, 255, 0.9) 100%); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(18, 22, 243, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(var(--glass-blur));
-            cursor: pointer;
-        }
-        .card-button:hover { 
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(18, 22, 243, 0.5);
-        }
+    /* Layout containers with glass look */
+    #particles-canvas{position:fixed; inset:0; z-index:-1; pointer-events:none}
+    .container{max-width:1200px; margin:0 auto; position:relative; z-index:1}
 
-        footer { 
-            background: var(--footer-bg); 
-            padding: 30px; 
-            border-radius: 25px; 
-            text-align: center; 
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-        }
+    header{
+      margin:120px 0 20px; padding:24px;
+      border-radius:28px; border:1px solid var(--border);
+      background: linear-gradient( to bottom, var(--glass-strong), var(--glass) );
+      backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow); color:#fff; text-align:center;
+    }
+    header h1{
+      margin:0 0 12px; font-size:2.6em;
+      background: linear-gradient(45deg,#fff,#ffd54d,#fff,#ffd54d);
+      background-size:300% auto; -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color: transparent; animation: shimmer 4s linear infinite;
+      text-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .brand-tagline{color:rgba(255,255,255,.92); margin-bottom:22px; line-height:1.6}
 
-        /* Modal قيد العمل */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-overlay.active {
-            display: flex;
-        }
-        .modal-content {
-            background: var(--card-bg); /* Use glass effect */
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 30px;
-            padding: 40px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            border: 2px solid var(--glass-border);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.4s ease;
-        }
-        .modal-content img {
-            width: 150px;
-            height: 150px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            animation: rotate 2s linear infinite;
-        }
-        .modal-content h3 {
-            color: var(--accent-color);
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        .modal-content p {
-            color: var(--text-color);
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-        .modal-close {
-            padding: 12px 40px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .modal-close:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(238, 90, 111, 0.4);
-        }
+    /* Contact area */
+    .contact-area{display:flex; justify-content:center; gap:12px; align-items:center; margin-bottom:20px}
+    .contact-area .label{color:#fff; font-weight:700; letter-spacing:.2px}
+    .contact-btn{
+      width:74px; height:74px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(255,172,51,.9), rgba(233,66,111,.9));
+      border:1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(var(--blur));
+    }
+    .contact-btn img{width:46px; height:46px; object-fit:contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25))}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+    /* Search glass */
+    .search-container{max-width:640px; margin:0 auto 26px}
+    .search-input-container{
+      display:flex; align-items:center; border-radius:999px; padding:8px 14px;
+      background: var(--glass-strong); border:1px solid var(--border); backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow)
+    }
+    .search-input{
+      flex:1; border:0; background:transparent; color:var(--text);
+      padding:12px 16px; font-size:1.05em; outline:none
+    }
+    .search-input::placeholder{color:rgba(255,255,255,.75)}
+    body:not(.dark-mode) .search-input::placeholder{color:rgba(40,40,40,.6)}
 
-        @media (min-width: 768px) {
-            header h1 { font-size: 3.8em; }
-            .cards-container { grid-template-columns: repeat(3, 1fr); gap: 30px; }
-            body { padding: 40px; }
-            .top-right-container {
-                flex-direction: row;
-                align-items: center;
-                top: 30px; /* Adjust top position for large screens */
-            }
-            .top-logo {
-                width: 100px;
-                height: 100px;
-            }
-            .contact-btn {
-                width: 60px;
-                height: 60px;
-            }
-            .contact-btn img {
-                width: 38px;
-                height: 38px;
-            }
-            .theme-toggle-btn {
-                width: 120px;
-                height: 60px;
-            }
-        }
-        @keyframes shimmer { 
-            to { background-position: 300% center; } 
-        }
-    </style>
+    /* Cards — stronger frosted glass */
+    .cards-container{display:grid; grid-template-columns:1fr; gap:26px; margin-bottom:46px}
+    .card{
+      border-radius:24px; overflow:hidden; border:1px solid var(--border);
+      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+      backdrop-filter: blur(calc(var(--blur) + 2px));
+      box-shadow: var(--shadow); transform: translateZ(0);
+    }
+    .card:hover{transform: translateY(-8px)}
+    .card-image{width:100%; height:220px; object-fit:cover}
+    .card-content{padding:22px; text-align:center}
+    .card-content h2{margin:0 0 10px; color:var(--accent)}
+    .card-content p{margin:0 0 14px}
+    .card-button{
+      display:inline-block; padding:12px 34px; border-radius:999px; border:1px solid var(--border);
+      background: linear-gradient(135deg,rgba(40,85,255,.9),rgba(35,50,255,.9));
+      color:#fff; font-weight:700; text-decoration:none; box-shadow: var(--shadow); cursor:pointer
+    }
+    .card-button:hover{transform: translateY(-3px)}
+
+    footer{
+      border-radius:24px; border:1px solid var(--border);
+      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+      backdrop-filter: blur(var(--blur)); box-shadow: var(--shadow);
+      padding:28px; text-align:center
+    }
+
+    @media (min-width: 768px){
+      .cards-container{grid-template-columns: repeat(3, 1fr)}
+      header{margin-top:120px}
+    }
+
+    @keyframes shimmer{to{background-position:300% center}}
+  </style>
 </head>
 <body>
-    
-    <!-- زر تبديل الوضع -->
-    <div class="theme-switch-wrapper">
-        <button class="theme-toggle-btn" id="themeToggle" title="تبديل الوضع">
-            <img class="toggle-image active" id="lightModeImg" src="light.mode.jpg" alt="الوضع الساطع">
-            <img class="toggle-image" id="darkModeImg" src="dark.mode.jpg" alt="الوضع الداكن">
-        </button>
+
+  <!-- Fixed top-right site logo (renamed) -->
+  <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-fixed" />
+
+  <!-- Smooth toggle with crossfade images and sliding knob -->
+  <div class="theme-switch-wrapper">
+    <button id="themeToggle" class="theme-toggle" title="تبديل الوضع" aria-label="تبديل الوضع">
+      <div class="theme-track">
+        <img src="light.mode.jpg" alt="وضع ساطع" class="track-light" />
+        <img src="dark.mode.jpg" alt="وضع داكن" class="track-dark" />
+      </div>
+      <span class="knob" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <!-- Background video (clearer) -->
+  <div class="video-background">
+    <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
+  </div>
+
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Modal قيد العمل -->
+  <div class="modal-overlay" id="workingModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.7); backdrop-filter: blur(10px); align-items:center; justify-content:center;">
+    <div class="modal-content" style="max-width:420px; width:90%; text-align:center; border-radius:28px; padding:36px; border:1px solid var(--border); background:linear-gradient(180deg,var(--glass-strong),var(--glass)); backdrop-filter: blur(calc(var(--blur) + 6px)); box-shadow: var(--shadow);">
+      <img src="wait.jpg" alt="قيد العمل" style="width:160px; height:160px; object-fit:contain; margin-bottom:14px; animation: spin 1.8s linear infinite;">
+      <h3 style="margin:0 0 8px; color:var(--accent); font-size:1.6em;">⏳ قيد العمل</h3>
+      <p style="margin:0 0 16px; color:var(--text)">هذا القسم لسه قيد التطوير.</p>
+      <button onclick="closeModal()" style="padding:10px 26px; border-radius:999px; border:1px solid var(--border); background:linear-gradient(135deg,#ff6b6b,#ee5a6f); color:#fff; font-weight:700; cursor:pointer;">حسناً</button>
     </div>
+  </div>
 
-    <!-- خلفية الفيديو -->
-    <div class="video-background">
-        <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
-    </div>
+  <div class="container">
+    <header>
+      <h1>🌟 موقع حلبسة 🌟</h1>
+      <div class="brand-tagline">
+        المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة وتحديات كرة القدم<br />
+        <strong>7LBSAA • 7LBSAA1</strong>
+      </div>
 
-    <canvas id="particles-canvas"></canvas>
+      <div class="contact-area">
+        <span class="label">للتواصل</span>
+        <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn" title="تواصل معنا">
+          <img src="kiki.jpg" alt="تواصل معنا" />
+        </a>
+      </div>
 
-    <!-- Modal قيد العمل -->
-    <div class="modal-overlay" id="workingModal">
-        <div class="modal-content">
-            <img src="wait.jpg" alt="قيد العمل">
-            <h3>⏳ قيد العمل</h3>
-            <p>هذا القسم لسه قيد التطوير وهيكون متاح قريباً!</p>
-            <button class="modal-close" onclick="closeModal()">حسناً</button>
+      <div class="search-container">
+        <div class="search-input-container">
+          <input id="searchInput" class="search-input" type="text" placeholder="ابحث عن تمبلت، مدرس، أو تحدي..." />
         </div>
-    </div>
+      </div>
+    </header>
 
-    <div class="container">
-        <header>
-            <!-- صورة الموقع والتواصل على اليمين -->
-            <div class="top-right-container">
-                <img src="toplogo1.jpg" alt="شعار حلبسة" class="top-logo" loading="lazy">
-                <div class="contact-section">
-                    <span class="contact-label">للتواصل</span>
-                    <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-btn" title="تواصل معنا">
-                        <img src="kiki.jpg" alt="تواصل معنا">
-                    </a>
-                </div>
-            </div>
-            
-            <h1>🌟 موقع حلبسة 🌟</h1>
-            <div class="brand-tagline">
-                المنصة العربية الأولى للتمبلتات والميمز وطلاب الثانوية العامة<br>
-                <strong>7LBSAA • 7LBSAA1</strong>
-            </div>
-
-            <div class="search-container">
-                <div class="search-input-container">
-                    <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن تمبلت، مدرس، أو تحدي...">
-                </div>
-            </div>
-        </header>
-
-        <div class="cards-container">
-            <div class="card" data-category="ميمز تمبلتات مضحكة">
-                <img src="images/logo3.jpg" loading="lazy" alt="تمبلتات ميمز" class="card-image">
-                <div class="card-content">
-                    <h2>التمبلتات والميمز</h2>
-                    <p>أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية.</p>
-                    <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="card-button">دخول 😂</a>
-                </div>
-            </div>
-
-            <div class="card" data-category="تعليم مدرسين ثانوية عامة">
-                <img src="images/logo2.jpg" loading="lazy" alt="مدرسين الثانوية" class="card-image">
-                <div class="card-content">
-                    <h2>مدرسين الثانوية</h2>
-                    <p>دليلك الشامل لأفضل مدرسي الثانوية العامة في مصر.</p>
-                    <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="card-button">دخول 🎓</a>
-                </div>
-            </div>
-
-            <div class="card" data-category="تحدي كرة قدم معلومات">
-                <img src="football.7lbsaa.jpg" loading="lazy" alt="تحدي كرة القدم" class="card-image">
-                <div class="card-content">
-                    <h2>تحدي معلومات كرة القدم</h2>
-                    <p>اختبر معلوماتك في كرة القدم وتحدى أصحابك!</p>
-                    <button class="card-button" onclick="showWorkingModal()">دخول ⚽</button>
-                </div>
-            </div>
+    <div class="cards-container">
+      <div class="card" data-category="ميمز تمبلتات مضحكة">
+        <img src="images/logo3.jpg" loading="lazy" alt="تمبلتات ميمز" class="card-image" />
+        <div class="card-content">
+          <h2>التمبلتات والميمز</h2>
+          <p>أكبر مكتبة تمبلتات ميمز مصرية حصرية بجودة عالية.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaa.memes/" class="card-button">دخول 😂</a>
         </div>
+      </div>
 
-        <footer>
-            <div style="text-align: right; margin-bottom: 15px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 8px;">عن موقع حلبسة (7LBSAA):</h3>
-                <p style="font-size: 0.95em; line-height: 1.6;">المنصة الأكبر التي تجمع بين الترفيه والتعليم لخدمة الشباب العربي.</p>
-            </div>
-            <p><strong>جميع الحقوق محفوظة © موقع حلبسة الرسمي • 7LBSAA</strong></p>
-        </footer>
+      <div class="card" data-category="تعليم مدرسين ثانوية عامة">
+        <img src="images/logo2.jpg" loading="lazy" alt="مدرسين الثانوية" class="card-image" />
+        <div class="card-content">
+          <h2>مدرسين الثانوية</h2>
+          <p>دليلك الشامل لأفضل مدرسي الثانوية العامة في مصر.</p>
+          <a href="https://7lbsaa1.github.io/7lbsaateachers/" class="card-button">دخول 🎓</a>
+        </div>
+      </div>
+
+      <div class="card" data-category="تحدي كرة قدم معلومات">
+        <img src="football.7lbsaa.jpg" loading="lazy" alt="تحدي كرة القدم" class="card-image" />
+        <div class="card-content">
+          <h2>تحدي معلومات كرة القدم</h2>
+          <p>اختبر معلوماتك في كرة القدم وتحدى أصحابك!</p>
+          <button class="card-button" onclick="showWorkingModal()">دخول ⚽</button>
+        </div>
+      </div>
     </div>
 
-    <script>
-        // تفعيل زر الوضع الداكن
-        const themeToggle = document.getElementById('themeToggle');
-        const lightModeImg = document.getElementById('lightModeImg');
-        const darkModeImg = document.getElementById('darkModeImg');
-        
-        // تحميل الوضع المحفوظ
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            lightModeImg.classList.remove('active');
-            darkModeImg.classList.add('active');
-        } else {
-            lightModeImg.classList.add('active');
-            darkModeImg.classList.remove('active');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                lightModeImg.classList.remove('active');
-                darkModeImg.classList.add('active');
-            } else {
-                localStorage.setItem('theme', 'light');
-                lightModeImg.classList.add('active');
-                darkModeImg.classList.remove('active');
-            }
-        });
+    <footer>
+      <div style="text-align:right; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+        <h3 style="color:var(--accent); margin:0 0 6px;">عن موقع حلبسة (7LBSAA):</h3>
+        <p style="margin:0; line-height:1.6;">المنصة الأكبر التي تجمع بين الترفيه والتعليم لخدمة الشباب العربي.</p>
+      </div>
+      <p><strong>جميع الحقوق محفوظة © موقع حلبسة الرسمي • 7LBSAA</strong></p>
+    </footer>
+  </div>
 
-        // Modal Functions
-        function showWorkingModal() {
-            document.getElementById('workingModal').classList.add('active');
-        }
-        
-        function closeModal() {
-            document.getElementById('workingModal').classList.remove('active');
-        }
-        
-        // إغلاق Modal عند الضغط خارجها
-        document.getElementById('workingModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
+  <style>
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  </style>
 
-        // بحث الكروت
-        const searchInput = document.getElementById('searchInput');
-        const cards = document.querySelectorAll('.card');
-        searchInput.addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            cards.forEach(card => {
-                const category = card.dataset.category.toLowerCase();
-                card.style.display = category.includes(val) ? 'block' : 'none';
-            });
-        });
+  <script>
+    // Theme state
+    const toggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved === 'dark'){ document.body.classList.add('dark-mode'); }
 
-        // خلفية الجسيمات
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
 
-        let particles = [];
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.speedY = Math.random() * 0.4 + 0.1;
-                this.size = Math.random() * 1.5 + 0.5;
-            }
-            update() {
-                this.y += this.speedY;
-                if (this.y > canvas.height) this.y = -10;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(255,255,255,0.4)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        for(let i=0; i<60; i++) particles.push(new Particle());
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
+    // Modal "قيد العمل"
+    function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
+    function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
+    document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
+
+    // Search filter
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+    searchInput.addEventListener('input', (e)=>{
+      const q = e.target.value.toLowerCase().trim();
+      cards.forEach(card=>{
+        const c = (card.dataset.category || '').toLowerCase();
+        card.style.display = c.includes(q) ? 'block' : 'none';
+      });
+    });
+
+    // Particles (slightly brighter for clarity)
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+
+    const particles = Array.from({length:70}, ()=>({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      s: Math.random()*1.8+0.6,
+      vy: Math.random()*0.45+0.12,
+      a: Math.random()*0.35+0.45
+    }));
+
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.y += p.vy; if(p.y>canvas.height) p.y = -10;
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fill();
+      });
+      requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
 </body>
 </html>
+Scroll down
 
