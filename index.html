@@ -334,130 +334,111 @@
         </div>
       </div>
     </div>
-
 <footer>
-  <!-- حاوية الفوتر القصوى -->
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 20px;">
-    
-    <!-- شبكة الفوتر: 3 أعمدة (ليماري - يمين، المنتصف،ليماري - يسار) -->
-    <div style="
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      flex-wrap: wrap; 
-      gap: 20px 40px;
-      padding: 30px 0;
-    ">
-
-      <!-- اليسار (اللوجوهات الاجتماعية) -->
-      <div class="footer-section" style="
-        display: flex; 
-        align-items: center; 
-        justify-content: flex-end; /* محاذاة لليمين بسبب RTL */
-        gap: 15px;
-        flex: 1;
-        min-width: 200px;
-      ">
-        <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" target="_blank" aria-label="فيسبوك">
-          <img src="FACEBOOK.jpg" alt="Facebook" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; transition: transform 0.3s ease;" />
-        </a>
-        <a href="https://www.tiktok.com/@7lbsaa1" target="_blank" aria-label="تيك توك">
-          <img src="TIKTOK.jpg" alt="TikTok" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; transition: transform 0.3s ease;" />
-        </a>
-        <a href="https://www.pinterest.com/7lbsaa1/" target="_blank" aria-label="بينتيريست">
-          <img src="PINTEREST.jpg" alt="Pinterest" class="social-icon" style="width: 40px; height: 40px; border-radius: 50%; transition: transform 0.3s ease;" />
-        </a>
-      </div>
-
-      <!-- المنتصف (شعار الموقع) -->
-      <div class="footer-section" style="
-        display: flex; 
-        justify-content: center;
-        flex: 0 0 auto; /* لا يتمدد ولا يتقلص */
-      ">
-        <img src="7LBSAA.jpg" alt="شعار موقع حلبسة" style="
-          width: 120px; 
-          height: auto; 
-          object-fit: contain;
-          filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
-        " />
-      </div>
-
-      <!-- اليمين (رابط تواصل معنا - سيظهر على اليسار بسبب RTL في الصفحة) -->
-      <div class="footer-section" style="
-        display: flex; 
-        align-items: center; 
-        justify-content: flex-start; /* محاذاة لليسار بسبب RTL */
-        flex: 1;
-        min-width: 200px;
-      ">
-        <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" style="
-          display: flex; 
-          align-items: center; 
-          gap: 8px; 
-          text-decoration: none; 
-          color: var(--text-light);
-          font-weight: 700;
-          padding: 8px 16px;
-          border-radius: 999px;
-          background: linear-gradient(90deg, var(--accent-light), #4a8dff);
-          box-shadow: 0 6px 16px rgba(45, 100, 255, 0.25);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        ">
-          <span style="color: #fff;">تواصل معنا</span>
-          <img src="CONTACT-US.jpg" alt="تواصل معنا" style="width: 28px; height: 28px; display: block;" />
-        </a>
-      </div>
-
+  <div class="footer-container">
+    <div class="footer-left">
+      <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" target="_blank" aria-label="فيسبوك">
+        <img src="FACEBOOK.jpg" alt="فيسبوك" class="footer-social-icon">
+      </a>
+      <a href="https://www.pinterest.com/7lbsaa1/" target="_blank" aria-label="بينتريست">
+        <img src="PINTEREST.jpg" alt="بينتريست" class="footer-social-icon">
+      </a>
+      <a href="https://www.tiktok.com/@7lbsaa1" target="_blank" aria-label="تيك توك">
+        <img src="TIKTOK.jpg" alt="تيك توك" class="footer-social-icon">
+      </a>
     </div>
-
-    <!-- سطر الفاصل -->
-    <div style="
-      border-top: 1px solid currentColor; 
-      opacity: 0.15; 
-      margin-bottom: 20px;
-    "></div>
-
-    <!-- نص الحقوق -->
-    <p style="margin: 0; font-size: 0.85rem; opacity: 0.8; text-align: center;">
-      جميع الحقوق محفوظة &copy; موقع حلبسة الرسمية 2026
-    </p>
-
+    
+    <div class="footer-center">
+      <img src="7LBSAA.jpg" alt="شعار حلبسة" class="footer-logo">
+    </div>
+    
+    <div class="footer-right">
+      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill-footer" aria-label="تواصل معنا">
+        <img src="CONTACT-US.jpg" alt="تواصل معنا">
+      </a>
+    </div>
   </div>
+</footer>
 
-  <!-- أنماط إضافية وتأثيرات للتفاعل -->
-  <style>
-    /* تأثير تحويم (Hover) لأيقونات السوشيال ميديا */
-    .social-icon:hover {
-      transform: translateY(-3px) scale(1.1);
-      filter: brightness(1.1);
-    }
+<style>
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
 
-    /* تأثير تحويم لزر تواصل معنا في الوضع المضيء */
-    footer a[href*="contact-us"]:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 22px rgba(0, 86, 255, 0.45);
-    }
+  .footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
 
-    /* تأثير تكيف لون النوص في الوضع المظلم */
-    body.dark-mode footer a[href*="contact-us"] {
-      background: linear-gradient(90deg, #ff9f2f, #ff6a2f);
-      box-shadow: 0 6px 16px rgba(255, 130, 50, 0.3);
-    }
+  .footer-social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    transition: all 0.35s ease;
+    border: 2px solid transparent;
+    object-fit: cover;
+  }
 
-    body.dark-mode footer a[href*="contact-us"]:hover {
-      box-shadow: 0 8px 22px rgba(255, 130, 50, 0.45);
-    }
+  .footer-social-icon:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-light);
+  }
 
-    /* تحسين المظهر على الشاشات الصغيرة جداً */
-    @media (max-width: 600px) {
-      footer .footer-section {
-        flex: 1 1 100% !important;
-        justify-content: center !important;
-      }
-    }
-  </style>
-</footer>  </div>
+  body.dark-mode .footer-social-icon:hover {
+    border-color: var(--accent-dark);
+  }
+
+  .footer-logo {
+    width: 70px;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    transition: filter 0.35s ease;
+  }
+
+  .footer-logo:hover {
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
+  }
+
+  .contact-pill-footer {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-light), #4a8dff);
+    box-shadow: 0 8px 20px rgba(0, 86, 255, 0.3);
+    transition: all 0.35s ease;
+  }
+
+  .contact-pill-footer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(0, 86, 255, 0.4);
+  }
+
+  body.dark-mode .contact-pill-footer {
+    background: linear-gradient(90deg, var(--accent-dark), #ff9500);
+    box-shadow: 0 8px 20px rgba(255, 150, 0, 0.3);
+  }
+
+  body.dark-mode .contact-pill-footer:hover {
+    box-shadow: 0 12px 26px rgba(255, 150, 0, 0.4);
+  }
+
+  .contact-pill-footer img {
+    height: 28px;
+    width: auto;
+    transition: transform 0.35s ease;
+  }
+
+  .contact-pill-footer:hover img {
+    transform: scale(1.05);
+  }
+</style>
+ </div>
 
   <style>
     @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
