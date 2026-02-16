@@ -244,20 +244,22 @@
     .card-button:hover{ transform: translateY(-3px) }
     body.dark-mode .card-button{ background: linear-gradient(90deg,#ff9f2f,#ff6a2f); box-shadow: 0 10px 26px rgba(255,130,50,.35) }
 
+    /* تصميم الـ Footer الجديد */
     footer{
-      margin:0 auto; max-width:920px; text-align:center;
-      border-radius:18px; border:1px solid var(--border-light);
+      margin:30px auto 0; max-width:920px; border-radius:18px; 
+      border:1px solid var(--border-light);
       background: linear-gradient(180deg, var(--glass1-light), var(--glass2-light));
-      backdrop-filter: blur(var(--blur)); box-shadow: 0 12px 40px rgba(0,0,0,.16);
-      padding:22px; transition: background .5s ease, border-color .35s ease, box-shadow .35s ease;
+      backdrop-filter: blur(var(--blur)); 
+      box-shadow: 0 12px 40px rgba(0,0,0,.16);
+      padding:18px 0;
+      transition: background .5s ease, border-color .35s ease, box-shadow .35s ease;
     }
     body.dark-mode footer{
       border-color: var(--border-dark);
       background: linear-gradient(180deg, var(--glass1-dark), var(--glass2-dark));
       box-shadow: 0 14px 46px rgba(0,0,0,.32);
     }
-
-    /* === التصميم الجديد للفوتر === */
+    
     .footer-container {
       display: flex;
       justify-content: space-between;
@@ -265,8 +267,6 @@
       width: 100%;
       padding: 0 15px;
       box-sizing: border-box;
-      flex-wrap: wrap;
-      gap: 20px;
     }
 
     .footer-left, .footer-right {
@@ -294,7 +294,7 @@
     }
 
     .footer-logo {
-      width: 80px;
+      width: 70px;
       height: auto;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
       transition: filter 0.35s ease;
@@ -337,9 +337,8 @@
       transform: scale(1.05);
     }
 
-    footer .top{margin-bottom:10px; border-bottom:1px solid currentColor; opacity:.25}
-
     @keyframes shimmer{to{background-position:300% center}}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
@@ -442,10 +441,6 @@
       </div>
     </footer>
   </div>
-
-  <style>
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  </style>
 
   <script>
     // تحميل السمة المحفوظة
