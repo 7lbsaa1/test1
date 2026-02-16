@@ -334,7 +334,8 @@
         </div>
       </div>
     </div>
-    <footer class="pro-footer">
+
+<footer class="pro-footer">
   <div class="footer-container">
 
     <!-- السوشيال ميديا -->
@@ -368,4 +369,27 @@
     جميع الحقوق محفوظة © موقع حلبسة 2026
   </div>
 </footer>
+  </div>
 
+  <style>
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  </style>
+
+  <script>
+    // تحميل السمة المحفوظة
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
+
+    // تبديل السمة
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // Modal قيد العمل
+    function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
+    function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
+    document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
+  </script>
+</body>
+</html>
