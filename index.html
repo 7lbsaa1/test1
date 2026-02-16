@@ -334,131 +334,38 @@
         </div>
       </div>
     </div>
-<footer>
+    <footer class="pro-footer">
   <div class="footer-container">
-    <div class="footer-left">
-      <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" target="_blank" aria-label="فيسبوك">
-        <img src="FACEBOOK.jpg" alt="فيسبوك" class="footer-social-icon">
+
+    <!-- السوشيال ميديا -->
+    <div class="footer-social">
+      <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" target="_blank">
+        <img src="FACEBOOK.jpg" alt="Facebook">
       </a>
-      <a href="https://www.pinterest.com/7lbsaa1/" target="_blank" aria-label="بينتريست">
-        <img src="PINTEREST.jpg" alt="بينتريست" class="footer-social-icon">
+      <a href="https://www.pinterest.com/7lbsaa1/" target="_blank">
+        <img src="PINTEREST.jpg" alt="Pinterest">
       </a>
-      <a href="https://www.tiktok.com/@7lbsaa1" target="_blank" aria-label="تيك توك">
-        <img src="TIKTOK.jpg" alt="تيك توك" class="footer-social-icon">
-      </a>
-    </div>
-    
-    <div class="footer-center">
-      <img src="7LBSAA.jpg" alt="شعار حلبسة" class="footer-logo">
-    </div>
-    
-    <div class="footer-right">
-      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill-footer" aria-label="تواصل معنا">
-        <img src="CONTACT-US.jpg" alt="تواصل معنا">
+      <a href="https://www.tiktok.com/@7lbsaa1" target="_blank">
+        <img src="TIKTOK.jpg" alt="TikTok">
       </a>
     </div>
+
+    <!-- اللوجو في المنتصف -->
+    <div class="footer-logo">
+      <img src="7lbsaa7.png" alt="7LBSAA Logo">
+    </div>
+
+    <!-- تواصل معنا -->
+    <div class="footer-contact">
+      <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/">
+        <img src="CONTACT-US.jpg" alt="Contact Us">
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    جميع الحقوق محفوظة © موقع حلبسة 2026
   </div>
 </footer>
 
-<style>
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 15px;
-    box-sizing: border-box;
-  }
-
-  .footer-left, .footer-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .footer-social-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    transition: all 0.35s ease;
-    border: 2px solid transparent;
-    object-fit: cover;
-  }
-
-  .footer-social-icon:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent-light);
-  }
-
-  body.dark-mode .footer-social-icon:hover {
-    border-color: var(--accent-dark);
-  }
-
-  .footer-logo {
-    width: 70px;
-    height: auto;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-    transition: filter 0.35s ease;
-  }
-
-  .footer-logo:hover {
-    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
-  }
-
-  .contact-pill-footer {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--accent-light), #4a8dff);
-    box-shadow: 0 8px 20px rgba(0, 86, 255, 0.3);
-    transition: all 0.35s ease;
-  }
-
-  .contact-pill-footer:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 26px rgba(0, 86, 255, 0.4);
-  }
-
-  body.dark-mode .contact-pill-footer {
-    background: linear-gradient(90deg, var(--accent-dark), #ff9500);
-    box-shadow: 0 8px 20px rgba(255, 150, 0, 0.3);
-  }
-
-  body.dark-mode .contact-pill-footer:hover {
-    box-shadow: 0 12px 26px rgba(255, 150, 0, 0.4);
-  }
-
-  .contact-pill-footer img {
-    height: 28px;
-    width: auto;
-    transition: transform 0.35s ease;
-  }
-
-  .contact-pill-footer:hover img {
-    transform: scale(1.05);
-  }
-</style>
- </div>
-
-  <style>
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  </style>
-
-  <script>
-    // تحميل السمة المحفوظة
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
-
-    // تبديل السمة
-    document.getElementById('themeToggle').addEventListener('click', ()=>{
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    });
-
-    // Modal قيد العمل
-    function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
-    function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
-    document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
-  </script>
-</body>
-</html>
