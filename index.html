@@ -47,10 +47,10 @@
       --accent-light:#2f6bff;
       --accent-dark:#ffd54d;
 
-      --glass1-light: rgba(255,255,255,.65);
-      --glass2-light: rgba(255,255,255,.45);
-      --glass1-dark: rgba(20,22,40,.55);
-      --glass2-dark: rgba(20,22,40,.35);
+      --glass1-light: rgba(255,255,255,.3); /* تقليل العتامة للشفافية */
+      --glass2-light: rgba(255,255,255,.15); /* تقليل العتامة للشفافية */
+      --glass1-dark: rgba(20,22,40,.25); /* تقليل العتامة للشفافية في الوضع المظلم */
+      --glass2-dark: rgba(20,22,40,.1); /* تقليل العتامة للشفافية في الوضع المظلم */
 
       --blur: 18px;
       --border-light: rgba(0,0,0,.08);
@@ -247,9 +247,17 @@
     /* تصميم الـ Footer الجديد */
     footer{
       margin:30px auto 0; max-width:920px; border-radius:18px; 
-      background: transparent;
-      padding: 20px 0;
-      transition: box-shadow .35s ease;
+      border:1px solid var(--border-light);
+      background: linear-gradient(180deg, var(--glass1-light), var(--glass2-light));
+      backdrop-filter: blur(var(--blur)); 
+      box-shadow: 0 12px 40px rgba(0,0,0,.16);
+      padding:18px 0;
+      transition: background .5s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+    body.dark-mode footer{
+      border-color: var(--border-dark);
+      background: linear-gradient(180deg, var(--glass1-dark), var(--glass2-dark));
+      box-shadow: 0 14px 46px rgba(0,0,0,.32);
     }
     
     .footer-container {
@@ -257,30 +265,28 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      padding: 0 15px;
+      padding: 0 20px; /* زيادة التباعد لترتيب أفضل */
       box-sizing: border-box;
     }
 
     .footer-left, .footer-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 20px; /* زيادة الفجوة لترتيب أفضل */
     }
 
     .footer-social-icon {
-      width: 48px;
-      height: 48px;
+      width: 48px; /* زيادة الحجم */
+      height: 48px; /* زيادة الحجم */
       border-radius: 50%;
       transition: all 0.35s ease;
       border: 2px solid transparent;
       object-fit: cover;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
     }
 
     .footer-social-icon:hover {
-      transform: translateY(-4px) scale(1.05);
+      transform: translateY(-3px);
       border-color: var(--accent-light);
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
     }
 
     body.dark-mode .footer-social-icon:hover {
@@ -288,70 +294,57 @@
     }
 
     .footer-logo {
-      width: 80px;
+      width: 80px; /* زيادة الحجم */
       height: auto;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-      transition: filter 0.35s ease, transform 0.35s ease;
+      transition: filter 0.35s ease;
     }
 
     .footer-logo:hover {
       filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
-      transform: scale(1.05);
     }
 
-    .contact-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .contact-text {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-light);
-      transition: color 0.35s ease;
-    }
-    
-    body.dark-mode .contact-text {
-      color: var(--text-dark);
-    }
-    
     .contact-pill-footer {
-      display: inline-block;
-      padding: 0;
+      display: inline-flex; /* لترتيب الصورة والنص بجانب بعض */
+      align-items: center;
+      gap: 8px; /* فجوة بين الصورة والنص */
+      padding: 8px 16px;
       border-radius: 999px;
-      background: none;
-      box-shadow: none;
+      background: linear-gradient(90deg, var(--accent-light), #4a8dff);
+      box-shadow: 0 8px 20px rgba(0, 86, 255, 0.3);
       transition: all 0.35s ease;
-      border: none;
+      text-decoration: none;
     }
 
     .contact-pill-footer:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(0, 86, 255, 0.4);
+    }
+
+    body.dark-mode .contact-pill-footer {
+      background: linear-gradient(90deg, var(--accent-dark), #ff9500);
+      box-shadow: 0 8px 20px rgba(255, 150, 0, 0.3);
+    }
+
+    body.dark-mode .contact-pill-footer:hover {
+      box-shadow: 0 12px 26px rgba(255, 150, 0, 0.4);
     }
 
     .contact-pill-footer img {
-      height: 48px;
+      height: 32px; /* زيادة الحجم */
       width: auto;
-      border-radius: 50%;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.35s ease;
     }
 
     .contact-pill-footer:hover img {
-      transform: scale(1.08);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      transform: scale(1.05);
     }
 
-    .footer-divider {
-      height: 1px;
-      width: 100%;
-      background: linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent);
-      margin-top: 15px;
-    }
-    
-    body.dark-mode .footer-divider {
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+    .contact-pill-footer span {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1em;
+      white-space: nowrap; /* لمنع الالتفاف */
     }
 
     @keyframes shimmer{to{background-position:300% center}}
@@ -377,7 +370,7 @@
   </div>
 
   <div class="modal-overlay" id="workingModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.7); backdrop-filter: blur(10px); align-items:center; justify-content:center">
-    <div class="modal-content" style="max-width:420px; width:90%; text-align:center; border-radius:22px; padding:28px; border:1px solid var(--border-dark); background: linear-gradient(180deg, rgba(20,22,40,.55), rgba(20,22,40,.35)); backdrop-filter: blur(22px); box-shadow: 0 16px 56px rgba(0,0,0,.35);">
+    <div class="modal-content" style="max-width:420px; width:90%; text-align:center; border-radius:22px; padding:28px; border:1px solid var(--border-dark); background: linear-gradient(180deg, rgba(20,22,40,.55), rgba(20,22,40,.35)); backdrop-filter: blur(22px); box-shadow: 0 16px 56px rgba(0,0,0,.35);;">
       <img src="wait.jpg" alt="قيد العمل" style="width:160px; height:160px; object-fit:contain; margin-bottom:12px; animation: spin 1.8s linear infinite">
       <h3 style="margin:0 0 6px; color:#ffd54d">⏳ قيد العمل</h3>
       <p style="margin:0 0 14px;">هذا القسم لسه قيد التطوير.</p>
@@ -452,14 +445,11 @@
         
         <div class="footer-right">
           <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill-footer" aria-label="تواصل معنا">
-            <div class="contact-container">
-              <img src="CONTACT-US.jpg" alt="تواصل معنا">
-              <span class="contact-text">تواصل معنا</span>
-            </div>
+            <img src="CONTACT-US.jpg" alt="تواصل معنا">
+            <span>تواصل معنا</span>
           </a>
         </div>
       </div>
-      <div class="footer-divider"></div>
     </footer>
   </div>
 
