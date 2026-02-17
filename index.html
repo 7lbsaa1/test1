@@ -87,12 +87,12 @@
       width:100px; height:auto; object-fit:contain; border-radius:20px;
       background: none; border:none; padding:0;
       filter: drop-shadow(0 8px 22px rgba(0,0,0,.35));
-      pointer-events:none; /* صورة عرض فقط */
+      pointer-events:none;
       transition: transform .35s ease, filter .35s ease;
     }
     .site-brand-float:hover{ transform: translateY(-2px) }
 
-    /* محول الوضع (بدون صور) — UI نظيف */
+    /* محول الوضع */
     .theme-switch-wrapper{position:fixed; top:14px; left:14px; z-index:120}
     .theme-toggle{
       position:relative; width:var(--toggle-w); height:var(--toggle-h);
@@ -109,14 +109,13 @@
     }
     .theme-toggle:hover{ transform: translateY(-2px) }
 
-    /* المسار يتغير لونه وبه نجوم في الداكن وسحب في الفاتح */
     .theme-toggle .track{
       position:absolute; inset:0; border-radius:inherit;
       transition: background .6s ease, filter .6s ease;
       background:
         radial-gradient(circle at 15% 70%, rgba(255,255,255,.6) 0 8%, transparent 9%),
         radial-gradient(circle at 30% 25%, rgba(255,255,255,.7) 0 10%, transparent 11%),
-        linear-gradient(90deg,#9cc8ff,#e6f0ff); /* سحب خفيفة */
+        linear-gradient(90deg,#9cc8ff,#e6f0ff);
       filter: saturate(1.05);
     }
     body.dark-mode .theme-toggle .track{
@@ -124,10 +123,9 @@
         radial-gradient(circle at 25% 35%, rgba(255,255,255,.85) 0 2px, transparent 3px),
         radial-gradient(circle at 60% 60%, rgba(255,255,255,.8) 0 1.6px, transparent 1.7px),
         radial-gradient(circle at 80% 30%, rgba(255,255,255,.7) 0 1.8px, transparent 1.9px),
-        linear-gradient(90deg,#131a3a,#070d25); /* نجوم وليل */
+        linear-gradient(90deg,#131a3a,#070d25);
     }
 
-    /* المقبض */
     .knob{
       position:absolute; top:50%; left:6px; transform:translateY(-50%);
       width:var(--knob); height:var(--knob); border-radius:50%;
@@ -142,13 +140,10 @@
       box-shadow: 0 8px 22px rgba(0,0,0,.35), inset 0 2px 10px rgba(255,255,255,.35);
     }
 
-    /* أيقونات CSS داخل المقبض */
     .icon-sun, .icon-moon{ width:20px; height:20px; position:relative; transition: opacity .4s ease, transform .4s ease }
     .icon-sun{
       border-radius:50%; background: radial-gradient(circle,#ffd54d 0 60%, #ffb300 61% 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,213,77,.65),
-        0 0 16px rgba(255,196,0,.55);
+      box-shadow: 0 0 0 2px rgba(255,213,77,.65), 0 0 16px rgba(255,196,0,.55);
     }
     .icon-sun::before{
       content:""; position:absolute; inset:-6px;
@@ -161,19 +156,16 @@
     }
     .icon-moon{
       border-radius:50%;
-      background:
-        radial-gradient(circle at 40% 40%, #dfe4ff 0 60%, transparent 61%),
+      background: radial-gradient(circle at 40% 40%, #dfe4ff 0 60%, transparent 61%),
         radial-gradient(circle at 55% 55%, rgba(0,0,0,.18) 0 56%, transparent 57%);
       box-shadow: 0 0 16px rgba(160,170,255,.45);
     }
 
-    /* تبادل ظهور الأيقونات */
     .icon-sun{ opacity:1 }
     .icon-moon{ opacity:0; position:absolute }
     body.dark-mode .icon-sun{ opacity:0; transform: scale(.85) }
     body.dark-mode .icon-moon{ opacity:1; transform: scale(1) }
 
-    /* تخطيط الحاويات بأسلوب UI نظيف */
     .container{max-width:1180px; margin:0 auto; position:relative; z-index:1}
 
     header{
@@ -244,101 +236,131 @@
     .card-button:hover{ transform: translateY(-3px) }
     body.dark-mode .card-button{ background: linear-gradient(90deg,#ff9f2f,#ff6a2f); box-shadow: 0 10px 26px rgba(255,130,50,.35) }
 
-    /* تصميم الـ Footer الجديد */
-    footer{
-      margin:30px auto 0; max-width:920px; border-radius:18px; 
-      border:1px solid var(--border-light);
+    /* ========== الفوتر الجديد ========== */
+    .main-footer{
+      margin: 40px auto 0;
+      max-width: 1100px;
+      border-radius: 22px;
+      border: 1px solid var(--border-light);
       background: linear-gradient(180deg, var(--glass1-light), var(--glass2-light));
-      backdrop-filter: blur(var(--blur)); 
+      backdrop-filter: blur(var(--blur));
       box-shadow: 0 12px 40px rgba(0,0,0,.16);
-      padding:18px 0;
+      padding: 28px 20px;
       transition: background .5s ease, border-color .35s ease, box-shadow .35s ease;
     }
-    body.dark-mode footer{
+    body.dark-mode .main-footer{
       border-color: var(--border-dark);
       background: linear-gradient(180deg, var(--glass1-dark), var(--glass2-dark));
       box-shadow: 0 14px 46px rgba(0,0,0,.32);
     }
-    
-    .footer-container {
+
+    .footer-content{
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      padding: 0 15px;
-      box-sizing: border-box;
+      gap: 20px;
     }
 
-    .footer-left, .footer-right {
+    /* يمين - التواصل معنا */
+    .footer-right{
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+      justify-content: flex-end;
     }
+    .footer-contact-img{
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.2));
+      transition: transform .25s ease;
+    }
+    .footer-contact-img:hover{ transform: scale(1.08); }
+    .footer-contact-text{
+      font-weight: 700;
+      font-size: 1.1em;
+      color: var(--accent-light);
+      text-decoration: none;
+      transition: color .3s ease;
+    }
+    body.dark-mode .footer-contact-text{ color: var(--accent-dark); }
+    .footer-contact-text:hover{ text-decoration: underline; }
 
-    .footer-social-icon {
-      width: 42px;
-      height: 42px;
+    /* وسط - الشعار */
+    .footer-center{
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+    .footer-logo{
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,.25));
+      transition: transform .35s ease;
+    }
+    .footer-logo:hover{ transform: rotate(5deg) scale(1.05); }
+
+    /* يسار - السوشيال ميديا */
+    .footer-left{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 200px;
+      justify-content: flex-start;
+    }
+    .social-link{
+      display: inline-block;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      transition: all 0.35s ease;
-      border: 2px solid transparent;
+      overflow: hidden;
+      background: rgba(255,255,255,.3);
+      border: 1px solid var(--border-light);
+      transition: transform .25s ease, box-shadow .3s ease, border-color .35s ease;
+    }
+    body.dark-mode .social-link{
+      background: rgba(255,255,255,.08);
+      border-color: var(--border-dark);
+    }
+    .social-link:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    }
+    .social-link img{
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
-    .footer-social-icon:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent-light);
+    .footer-bottom{
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid currentColor;
+      opacity: .25;
+      text-align: center;
+      font-size: 0.9em;
     }
 
-    body.dark-mode .footer-social-icon:hover {
-      border-color: var(--accent-dark);
-    }
-
-    .footer-logo {
-      width: 70px;
-      height: auto;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-      transition: filter 0.35s ease;
-    }
-
-    .footer-logo:hover {
-      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25));
-    }
-
-    .contact-pill-footer {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent-light), #4a8dff);
-      box-shadow: 0 8px 20px rgba(0, 86, 255, 0.3);
-      transition: all 0.35s ease;
-    }
-
-    .contact-pill-footer:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 26px rgba(0, 86, 255, 0.4);
-    }
-
-    body.dark-mode .contact-pill-footer {
-      background: linear-gradient(90deg, var(--accent-dark), #ff9500);
-      box-shadow: 0 8px 20px rgba(255, 150, 0, 0.3);
-    }
-
-    body.dark-mode .contact-pill-footer:hover {
-      box-shadow: 0 12px 26px rgba(255, 150, 0, 0.4);
-    }
-
-    .contact-pill-footer img {
-      height: 28px;
-      width: auto;
-      transition: transform 0.35s ease;
-    }
-
-    .contact-pill-footer:hover img {
-      transform: scale(1.05);
+    /* استجابة للشاشات الصغيرة */
+    @media (max-width: 768px){
+      .footer-content{
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-right, .footer-left{
+        justify-content: center;
+      }
+      .footer-right{
+        flex-direction: column;
+      }
     }
 
     @keyframes shimmer{to{background-position:300% center}}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
@@ -377,7 +399,6 @@
     </header>
 
     <div class="cards-container">
-      <!-- البطاقة الجديدة: زيادة جودة الصور بالذكاء الاصطناعي -->
       <div class="card" data-category="زيادة جودة الصور بالذكاء الاصطناعي">
         <img src="7LBSAA.AI.jpg" class="card-image" alt="زيادة جودة الصور بالذكاء الاصطناعي" loading="lazy" />
         <div class="card-content">
@@ -415,45 +436,58 @@
       </div>
     </div>
 
-    <footer>
-      <div class="footer-container">
-        <div class="footer-left">
-          <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" target="_blank" aria-label="فيسبوك">
-            <img src="FACEBOOK.jpg" alt="فيسبوك" class="footer-social-icon">
-          </a>
-          <a href="https://www.pinterest.com/7lbsaa1/" target="_blank" aria-label="بينتريست">
-            <img src="PINTEREST.jpg" alt="بينتريست" class="footer-social-icon">
-          </a>
-          <a href="https://www.tiktok.com/@7lbsaa1" target="_blank" aria-label="تيك توك">
-            <img src="TIKTOK.jpg" alt="تيك توك" class="footer-social-icon">
-          </a>
-        </div>
+    <!-- ========== الفوتر الجديد ========== -->
+    <footer class="main-footer">
+      <div class="footer-content">
         
-        <div class="footer-center">
-          <img src="7lbsaa7.png" alt="شعار حلبسة" class="footer-logo">
-        </div>
-        
+        <!-- يمين - التواصل معنا -->
         <div class="footer-right">
-          <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="contact-pill-footer" aria-label="تواصل معنا">
-            <img src="CONTACT-US.jpg" alt="تواصل معنا">
+          <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="footer-contact-text">التواصل معنا</a>
+          <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/">
+            <img src="CONTACT-US.jpg" alt="تواصل معنا" class="footer-contact-img" />
           </a>
         </div>
+
+        <!-- وسط - الشعار -->
+        <div class="footer-center">
+          <img src="7LBSAA.jpg" alt="شعار حلبسة" class="footer-logo" />
+        </div>
+
+        <!-- يسار - السوشيال ميديا -->
+        <div class="footer-left">
+          <a href="https://www.facebook.com/?locale=ar_AR" class="social-link" target="_blank" rel="noopener">
+            <img src="FACEBOOK.jpg" alt="فيسبوك" />
+          </a>
+          <a href="https://www.tiktok.com/@7lbsaa1" class="social-link" target="_blank" rel="noopener">
+            <img src="TIKTOK.jpg" alt="تيك توك" />
+          </a>
+          <a href="https://www.pinterest.com/7lbsaa1/" class="social-link" target="_blank" rel="noopener">
+            <img src="PINTEREST.jpg" alt="بنترست" />
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p><strong>جميع الحقوق محفوظة © موقع حلبسة الرسمية 2026</strong></p>
       </div>
     </footer>
+
   </div>
 
+  <style>
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  </style>
+
   <script>
-    // تحميل السمة المحفوظة
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
 
-    // تبديل السمة
     document.getElementById('themeToggle').addEventListener('click', ()=>{
       document.body.classList.toggle('dark-mode');
       localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
     });
 
-    // Modal قيد العمل
     function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
     function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
     document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
