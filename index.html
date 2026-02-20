@@ -8,15 +8,15 @@
   <meta name="description" content=" موقع حلبسة: وتمبلتات وميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم. زيادة جودة الصور" />
   <link rel="canonical" href="https://7lbsaa1.github.io/7lbsaa/" />
 
-  <link rel="icon" href="logox1.jpg" type="image/jpg" sizes="96x96" />
-  <link rel="apple-touch-icon" href="logox1.jpg" />
+  <link rel="icon" href="7lbsaa.svg" type="image/svg" sizes="96x96" />
+  <link rel="apple-touch-icon" href="7lbsaa.svg" />
   <link rel="shortcut icon" type="image/jpg" href="logox1.jpg" />
-  
-  <!-- Open Graph -->
+
+    <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/" />
   <meta property="og:title" content="موقع حلبسة | 7LBSAA" />
-  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم." />
+  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم.تحسين الصور بالذكاء الاصطناعي." />
   <meta property="og:image" content="https://7lbsaa1.github.io/7lbsaa/logox1.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -24,7 +24,7 @@
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="موقع حلبسة | 7LBSAA" />
-  <meta name="twitter:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم." />
+  <meta name="twitter:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم.تحسين صور بالذكاء الاصطناعي." />
   <meta name="twitter:image" content="https://7lbsaa1.github.io/7lbsaa/logox1.jpg" />
 
   <!-- بيانات منظّمة: الشعار الرسمي -->
@@ -81,6 +81,63 @@
       min-width:100%; min-height:100%; object-fit:cover; filter:none;
     }
 
+    /* ============== إضافات رمضان والفوانيس ============== */
+    .fanos-container{
+        position:fixed; top:100px; z-index:110;
+        width:120px; height:auto; pointer-events:none;
+        transition: transform .5s ease;
+    }
+    .fanos-right{ right:10px; }
+    .fanos-left{ left:10px; }
+    .fanos-img{
+        width:100%; height:auto; object-fit:contain;
+        filter: drop-shadow(0 5px 15px rgba(0,0,0,.3));
+    }
+
+    /* رسالة رمضان كريم */
+    .ramadan-message{
+        position:fixed; top:150px; left:50%; transform:translateX(-50%); z-index:130;
+        padding: 8px 20px;
+        border-radius: 12px;
+        background: rgba(255, 213, 77, 0.95); /* لون ذهبي لامع */
+        color: #a52a2a; /* لون أحمر داكن للنص */
+        font-weight: bold;
+        font-size: 1.1em;
+        box-shadow: 0 6px 20px rgba(255, 213, 77, 0.5), 0 0 15px rgba(255, 255, 255, 0.8) inset;
+        animation: fadeInOut 6s ease-in-out forwards;
+        opacity: 0;
+        pointer-events: none;
+        text-align: center;
+    }
+    body.dark-mode .ramadan-message{
+        background: rgba(255, 180, 50, 0.95);
+        color: #1a1a1a;
+        box-shadow: 0 6px 20px rgba(255, 180, 50, 0.5), 0 0 15px rgba(0, 0, 0, 0.8) inset;
+    }
+
+    /* حركات الفوانيس */
+    @keyframes moveFanosRight {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(15px); }
+        100% { transform: translateX(0); }
+    }
+    @keyframes moveFanosLeft {
+        0% { transform: translateX(0); }
+        50% { transform: translateX(-15px); }
+        100% { transform: translateX(0); }
+    }
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+        10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+        100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    }
+
+    .fanos-right { animation: moveFanosRight 4s ease-in-out infinite alternate; }
+    .fanos-left { animation: moveFanosLeft 4s ease-in-out infinite alternate; }
+    /* ============== نهاية إضافات رمضان ============== */
+
+
     /* شعار أعلى اليمين "على الهوا" بلا صندوق */
     .site-brand-float{
       position:fixed; top:12px; right:12px; z-index:120;
@@ -91,6 +148,11 @@
       transition: transform .35s ease, filter .35s ease;
     }
     .site-brand-float:hover{ transform: translateY(-2px) }
+    
+    /* تعديل بسيط على z-index للفوانيس لتكون فوق الشعار العائم إذا تداخلوا */
+    .site-brand-float{ z-index:120; }
+    .fanos-container{ z-index:115; } /* لضمان ظهور الفوانيس فوق الفيديو وتحت المحتوى الرئيسي */
+
 
     /* محول الوضع */
     .theme-switch-wrapper{position:fixed; top:14px; left:14px; z-index:120}
@@ -166,7 +228,7 @@
     body.dark-mode .icon-sun{ opacity:0; transform: scale(.85) }
     body.dark-mode .icon-moon{ opacity:1; transform: scale(1) }
 
-    .container{max-width:1180px; margin:0 auto; position:relative; z-index:1}
+    .container{max-width:1180px; margin:0 auto; position:relative; z-index:10} /* زيادة z-index للمحتوى */
 
     header{
       margin:110px auto 20px; padding:26px 18px; max-width:920px;
@@ -359,11 +421,45 @@
         flex-direction: column;
       }
     }
+    
+    /* تعديل على استجابة الفوانيس */
+    @media (max-width: 992px) {
+        .fanos-container {
+            width: 80px; /* تصغير الفانوس على الشاشات المتوسطة */
+        }
+        .ramadan-message{
+            font-size: 1em;
+            padding: 6px 15px;
+        }
+    }
+    @media (max-width: 600px) {
+        .fanos-container {
+            display: none; /* إخفاء الفوانيس على الشاشات الصغيرة جداً */
+        }
+        .site-brand-float {
+            top: 10px; right: 10px; width: 80px; /* تصغير شعار الهوا */
+        }
+        .theme-switch-wrapper{ top: 10px; left: 10px; }
+    }
+
 
     @keyframes shimmer{to{background-position:300% center}}
   </style>
 </head>
 <body>
+
+  <!-- حاوية الفوانيس -->
+  <div class="fanos-container fanos-right">
+      <img src="fanos.png" alt="فانوس" class="fanos-img" />
+  </div>
+  <div class="fanos-container fanos-left">
+      <img src="fanos.png" alt="فانوس" class="fanos-img" />
+  </div>
+
+  <!-- رسالة رمضان كريم -->
+  <div class="ramadan-message" id="ramadanMessage">
+      رمضان كريم
+  </div>
 
   <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-float" />
 
@@ -378,6 +474,7 @@
   </div>
 
   <div class="video-background">
+    <!-- تأكد من وجود ملف الفيديو videos/koko2.mp4 -->
     <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
   </div>
 
@@ -450,12 +547,12 @@
 
         <!-- وسط - الشعار -->
         <div class="footer-center">
-          <img src="7LBSAA.jpg" alt="شعار حلبسة" class="footer-logo" />
+          <img src="7lbsaa7.png" alt="شعار حلبسة" class="footer-logo" />
         </div>
 
         <!-- يسار - السوشيال ميديا -->
         <div class="footer-left">
-          <a href="https://www.facebook.com/?locale=ar_AR" class="social-link" target="_blank" rel="noopener">
+          <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" class="social-link" target="_blank" rel="noopener">
             <img src="facebook.png" alt="فيسبوك" />
           </a>
           <a href="https://www.tiktok.com/@7lbsaa1" class="social-link" target="_blank" rel="noopener">
@@ -475,10 +572,6 @@
 
   </div>
 
-  <style>
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  </style>
-
   <script>
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
@@ -491,6 +584,16 @@
     function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
     function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
     document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
+    
+    // تشغيل رسالة رمضان كريم عند التحميل (تختفي بعد 6 ثواني)
+    document.addEventListener('DOMContentLoaded', function() {
+        const msg = document.getElementById('ramadanMessage');
+        // التأكد من ظهورها لبعض الوقت قبل تطبيق الحركة النهائية للاختفاء
+        setTimeout(() => {
+            msg.style.opacity = '1';
+            msg.style.animation = 'fadeInOut 6s ease-in-out forwards';
+        }, 100); // نعطيها فرصة بسيطة لتبدأ الحركة
+    });
   </script>
 </body>
-</html>
+</html>Scroll down
