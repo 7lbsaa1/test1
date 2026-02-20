@@ -12,7 +12,6 @@
   <link rel="apple-touch-icon" href="7lbsaa.svg" />
   <link rel="shortcut icon" type="image/jpg" href="logox1.jpg" />
 
-    <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/" />
   <meta property="og:title" content="موقع حلبسة | 7LBSAA" />
@@ -21,13 +20,11 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
-  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="موقع حلبسة | 7LBSAA" />
   <meta name="twitter:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم.تحسين صور بالذكاء الاصطناعي." />
   <meta name="twitter:image" content="https://7lbsaa1.github.io/7lbsaa/logox1.jpg" />
 
-  <!-- بيانات منظّمة: الشعار الرسمي -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,71 +71,122 @@
       color: var(--text-dark);
     }
 
-    /* خلفية الفيديو عادي بدون فلاتر */
     .video-background{position:fixed; inset:0; z-index:-2; overflow:hidden}
     .bg-video{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
       min-width:100%; min-height:100%; object-fit:cover; filter:none;
     }
 
-    /* ============== إضافات رمضان والفوانيس ============== */
-    .fanos-container{
-        position:fixed; top:100px; z-index:110;
-        width:120px; height:auto; pointer-events:none;
-        transition: transform .5s ease;
+    /* ===== فوانيس رمضان ===== */
+    .fanos{
+      position: fixed;
+      top: 0;
+      z-index: 119;
+      width: 80px;
+      height: auto;
+      filter: drop-shadow(0 0 12px rgba(255, 200, 50, 0.75));
+      pointer-events: none;
+      transform-origin: top center;
     }
-    .fanos-right{ right:10px; }
-    .fanos-left{ left:10px; }
-    .fanos-img{
-        width:100%; height:auto; object-fit:contain;
-        filter: drop-shadow(0 5px 15px rgba(0,0,0,.3));
+    /* الفانوس الأيمن */
+    .fanos-right{
+      right: 130px;
+      animation: swingRight 3s ease-in-out infinite;
     }
-
-    /* رسالة رمضان كريم */
-    .ramadan-message{
-        position:fixed; top:150px; left:50%; transform:translateX(-50%); z-index:130;
-        padding: 8px 20px;
-        border-radius: 12px;
-        background: rgba(255, 213, 77, 0.95); /* لون ذهبي لامع */
-        color: #a52a2a; /* لون أحمر داكن للنص */
-        font-weight: bold;
-        font-size: 1.1em;
-        box-shadow: 0 6px 20px rgba(255, 213, 77, 0.5), 0 0 15px rgba(255, 255, 255, 0.8) inset;
-        animation: fadeInOut 6s ease-in-out forwards;
-        opacity: 0;
-        pointer-events: none;
-        text-align: center;
-    }
-    body.dark-mode .ramadan-message{
-        background: rgba(255, 180, 50, 0.95);
-        color: #1a1a1a;
-        box-shadow: 0 6px 20px rgba(255, 180, 50, 0.5), 0 0 15px rgba(0, 0, 0, 0.8) inset;
+    /* الفانوس الأيسر */
+    .fanos-left{
+      left: 130px;
+      animation: swingLeft 3.4s ease-in-out infinite;
     }
 
-    /* حركات الفوانيس */
-    @keyframes moveFanosRight {
-        0% { transform: translateX(0); }
-        50% { transform: translateX(15px); }
-        100% { transform: translateX(0); }
-    }
-    @keyframes moveFanosLeft {
-        0% { transform: translateX(0); }
-        50% { transform: translateX(-15px); }
-        100% { transform: translateX(0); }
-    }
-    @keyframes fadeInOut {
-        0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
-        10% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        90% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    /* حبل الفانوس الأيمن */
+    .fanos-right::before,
+    .fanos-left::before{
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(180deg, rgba(255,200,50,.9), rgba(255,200,50,.4));
+      border-radius: 2px;
     }
 
-    .fanos-right { animation: moveFanosRight 4s ease-in-out infinite alternate; }
-    .fanos-left { animation: moveFanosLeft 4s ease-in-out infinite alternate; }
-    /* ============== نهاية إضافات رمضان ============== */
+    @keyframes swingRight{
+      0%   { transform: rotate(-12deg); }
+      50%  { transform: rotate(12deg);  }
+      100% { transform: rotate(-12deg); }
+    }
+    @keyframes swingLeft{
+      0%   { transform: rotate(12deg);  }
+      50%  { transform: rotate(-12deg); }
+      100% { transform: rotate(12deg);  }
+    }
 
+    /* ===== رسالة رمضان كريم ===== */
+    .ramadan-toast{
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      z-index: 9999;
+      background: linear-gradient(135deg, rgba(20,10,50,.92), rgba(80,30,10,.88));
+      border: 1px solid rgba(255,200,60,.45);
+      border-radius: 24px;
+      padding: 30px 36px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(255,180,0,.4), 0 20px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(18px);
+      min-width: 280px;
+      opacity: 0;
+      animation: toastIn .6s ease forwards, toastOut .6s ease 3.5s forwards;
+      pointer-events: none;
+    }
+    .ramadan-toast .toast-fanos-icon{
+      font-size: 2.8em;
+      display: block;
+      margin-bottom: 8px;
+      animation: gentlePulse 1.5s ease-in-out infinite;
+    }
+    .ramadan-toast h2{
+      margin: 0 0 6px;
+      font-size: 2em;
+      background: linear-gradient(90deg, #ffd54d, #ffaa00, #ffd54d);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 2.5s linear infinite;
+    }
+    .ramadan-toast p{
+      margin: 0;
+      font-size: 1em;
+      color: rgba(255,240,200,.85);
+      line-height: 1.6;
+    }
+    /* نجوم صغيرة في الرسالة */
+    .ramadan-toast .stars{
+      margin-top: 12px;
+      font-size: 1.2em;
+      letter-spacing: 6px;
+      opacity: .75;
+    }
 
-    /* شعار أعلى اليمين "على الهوا" بلا صندوق */
+    @keyframes toastIn{
+      0%   { opacity:0; transform: translate(-50%,-50%) scale(0.7); }
+      100% { opacity:1; transform: translate(-50%,-50%) scale(1);   }
+    }
+    @keyframes toastOut{
+      0%   { opacity:1; transform: translate(-50%,-50%) scale(1);   }
+      100% { opacity:0; transform: translate(-50%,-50%) scale(0.7); }
+    }
+    @keyframes gentlePulse{
+      0%,100% { transform: scale(1);    }
+      50%      { transform: scale(1.1); }
+    }
+
+    /* شعار أعلى اليمين */
     .site-brand-float{
       position:fixed; top:12px; right:12px; z-index:120;
       width:100px; height:auto; object-fit:contain; border-radius:20px;
@@ -148,11 +196,6 @@
       transition: transform .35s ease, filter .35s ease;
     }
     .site-brand-float:hover{ transform: translateY(-2px) }
-    
-    /* تعديل بسيط على z-index للفوانيس لتكون فوق الشعار العائم إذا تداخلوا */
-    .site-brand-float{ z-index:120; }
-    .fanos-container{ z-index:115; } /* لضمان ظهور الفوانيس فوق الفيديو وتحت المحتوى الرئيسي */
-
 
     /* محول الوضع */
     .theme-switch-wrapper{position:fixed; top:14px; left:14px; z-index:120}
@@ -228,7 +271,7 @@
     body.dark-mode .icon-sun{ opacity:0; transform: scale(.85) }
     body.dark-mode .icon-moon{ opacity:1; transform: scale(1) }
 
-    .container{max-width:1180px; margin:0 auto; position:relative; z-index:10} /* زيادة z-index للمحتوى */
+    .container{max-width:1180px; margin:0 auto; position:relative; z-index:1}
 
     header{
       margin:110px auto 20px; padding:26px 18px; max-width:920px;
@@ -298,7 +341,7 @@
     .card-button:hover{ transform: translateY(-3px) }
     body.dark-mode .card-button{ background: linear-gradient(90deg,#ff9f2f,#ff6a2f); box-shadow: 0 10px 26px rgba(255,130,50,.35) }
 
-    /* ========== الفوتر الجديد ========== */
+    /* ========== الفوتر ========== */
     .main-footer{
       margin: 40px auto 0;
       max-width: 1100px;
@@ -324,7 +367,6 @@
       gap: 20px;
     }
 
-    /* يمين - التواصل معنا */
     .footer-right{
       display: flex;
       align-items: center;
@@ -334,131 +376,74 @@
       justify-content: flex-end;
     }
     .footer-contact-img{
-      width: 55px;
-      height: 55px;
-      object-fit: contain;
+      width: 55px; height: 55px; object-fit: contain;
       filter: drop-shadow(0 4px 10px rgba(0,0,0,.2));
       transition: transform .25s ease;
     }
     .footer-contact-img:hover{ transform: scale(1.08); }
     .footer-contact-text{
-      font-weight: 700;
-      font-size: 1.1em;
-      color: var(--accent-light);
-      text-decoration: none;
+      font-weight: 700; font-size: 1.1em;
+      color: var(--accent-light); text-decoration: none;
       transition: color .3s ease;
     }
     body.dark-mode .footer-contact-text{ color: var(--accent-dark); }
     .footer-contact-text:hover{ text-decoration: underline; }
 
-    /* وسط - الشعار */
-    .footer-center{
-      flex: 0 0 auto;
-      display: flex;
-      justify-content: center;
-    }
+    .footer-center{ flex: 0 0 auto; display: flex; justify-content: center; }
     .footer-logo{
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
+      width: 80px; height: 80px; object-fit: contain;
       filter: drop-shadow(0 6px 16px rgba(0,0,0,.25));
       transition: transform .35s ease;
     }
     .footer-logo:hover{ transform: rotate(5deg) scale(1.05); }
 
-    /* يسار - السوشيال ميديا */
     .footer-left{
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex: 1;
-      min-width: 200px;
-      justify-content: flex-start;
+      display: flex; align-items: center; gap: 14px;
+      flex: 1; min-width: 200px; justify-content: flex-start;
     }
     .social-link{
-      display: inline-block;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      overflow: hidden;
+      display: inline-block; width: 48px; height: 48px;
+      border-radius: 50%; overflow: hidden;
       background: rgba(255,255,255,.3);
       border: 1px solid var(--border-light);
       transition: transform .25s ease, box-shadow .3s ease, border-color .35s ease;
     }
-    body.dark-mode .social-link{
-      background: rgba(255,255,255,.08);
-      border-color: var(--border-dark);
-    }
-    .social-link:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,.25);
-    }
-    .social-link img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    body.dark-mode .social-link{ background: rgba(255,255,255,.08); border-color: var(--border-dark); }
+    .social-link:hover{ transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+    .social-link img{ width: 100%; height: 100%; object-fit: cover; }
 
     .footer-bottom{
-      margin-top: 20px;
-      padding-top: 16px;
+      margin-top: 20px; padding-top: 16px;
       border-top: 1px solid currentColor;
-      opacity: .25;
-      text-align: center;
-      font-size: 0.9em;
+      opacity: .25; text-align: center; font-size: 0.9em;
     }
 
-    /* استجابة للشاشات الصغيرة */
     @media (max-width: 768px){
-      .footer-content{
-        flex-direction: column;
-        text-align: center;
-      }
-      .footer-right, .footer-left{
-        justify-content: center;
-      }
-      .footer-right{
-        flex-direction: column;
-      }
-    }
-    
-    /* تعديل على استجابة الفوانيس */
-    @media (max-width: 992px) {
-        .fanos-container {
-            width: 80px; /* تصغير الفانوس على الشاشات المتوسطة */
-        }
-        .ramadan-message{
-            font-size: 1em;
-            padding: 6px 15px;
-        }
-    }
-    @media (max-width: 600px) {
-        .fanos-container {
-            display: none; /* إخفاء الفوانيس على الشاشات الصغيرة جداً */
-        }
-        .site-brand-float {
-            top: 10px; right: 10px; width: 80px; /* تصغير شعار الهوا */
-        }
-        .theme-switch-wrapper{ top: 10px; left: 10px; }
+      .footer-content{ flex-direction: column; text-align: center; }
+      .footer-right, .footer-left{ justify-content: center; }
+      .footer-right{ flex-direction: column; }
+      /* تصغير الفوانيس على الموبايل */
+      .fanos{ width: 55px; }
+      .fanos-right{ right: 115px; }
+      .fanos-left{ left: 115px; }
     }
 
-
-    @keyframes shimmer{to{background-position:300% center}}
+    @keyframes shimmer{ to{ background-position:300% center } }
+    @keyframes spin{ from{ transform:rotate(0) } to{ transform:rotate(360deg) } }
   </style>
 </head>
 <body>
 
-  <!-- حاوية الفوانيس -->
-  <div class="fanos-container fanos-right">
-      <img src="fanos.png" alt="فانوس" class="fanos-img" />
-  </div>
-  <div class="fanos-container fanos-left">
-      <img src="fanos.png" alt="فانوس" class="fanos-img" />
-  </div>
+  <!-- ===== فوانيس رمضان ===== -->
+  <img src="fanos.png" alt="فانوس رمضان" class="fanos fanos-right" />
+  <img src="fanos.png" alt="فانوس رمضان" class="fanos fanos-left" />
 
-  <!-- رسالة رمضان كريم -->
-  <div class="ramadan-message" id="ramadanMessage">
-      رمضان كريم
+  <!-- ===== رسالة رمضان كريم ===== -->
+  <div class="ramadan-toast" id="ramadanToast">
+    <span class="toast-fanos-icon">🪔</span>
+    <h2>رمضان كريم 🌙</h2>
+    <p>كل عام وأنتم بخير<br/>أعاده الله عليكم بالخير والبركة</p>
+    <div class="stars">✨ ✨ ✨</div>
   </div>
 
   <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-float" />
@@ -474,7 +459,6 @@
   </div>
 
   <div class="video-background">
-    <!-- تأكد من وجود ملف الفيديو videos/koko2.mp4 -->
     <video class="bg-video" src="videos/koko2.mp4" muted loop autoplay playsinline></video>
   </div>
 
@@ -491,7 +475,6 @@
     <header>
       <h1>⭐موقع حلبسة⭐</h1>
       <div class="brand-sub">المنصة العربية الأولى للميمز والتمبلتات وطلاب الثانوية العامة وتحديات كرة القدم وزيادة جودة الصور </div>
-
       <a class="contact-pill" href="https://7lbsaa1.github.io/7lbsaa.contact-us/" title="تواصل معنا">تواصل معنا</a>
     </header>
 
@@ -533,11 +516,8 @@
       </div>
     </div>
 
-    <!-- ========== الفوتر الجديد ========== -->
     <footer class="main-footer">
       <div class="footer-content">
-        
-        <!-- يمين - التواصل معنا -->
         <div class="footer-right">
           <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/" class="footer-contact-text">التواصل معنا</a>
           <a href="https://7lbsaa1.github.io/7lbsaa.contact-us/">
@@ -545,12 +525,10 @@
           </a>
         </div>
 
-        <!-- وسط - الشعار -->
         <div class="footer-center">
           <img src="7lbsaa7.png" alt="شعار حلبسة" class="footer-logo" />
         </div>
 
-        <!-- يسار - السوشيال ميديا -->
         <div class="footer-left">
           <a href="https://www.facebook.com/profile.php?id=61584178882412&locale=ar_AR" class="social-link" target="_blank" rel="noopener">
             <img src="facebook.png" alt="فيسبوك" />
@@ -562,17 +540,16 @@
             <img src="pinterest.png" alt="بنترست" />
           </a>
         </div>
-
       </div>
 
       <div class="footer-bottom">
         <p><strong>جميع الحقوق محفوظة © موقع حلبسة الرسمية 2026</strong></p>
       </div>
     </footer>
-
   </div>
 
   <script>
+    // ثيم
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
 
@@ -581,19 +558,16 @@
       localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
     });
 
+    // مودال العمل
     function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
     function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
     document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
-    
-    // تشغيل رسالة رمضان كريم عند التحميل (تختفي بعد 6 ثواني)
-    document.addEventListener('DOMContentLoaded', function() {
-        const msg = document.getElementById('ramadanMessage');
-        // التأكد من ظهورها لبعض الوقت قبل تطبيق الحركة النهائية للاختفاء
-        setTimeout(() => {
-            msg.style.opacity = '1';
-            msg.style.animation = 'fadeInOut 6s ease-in-out forwards';
-        }, 100); // نعطيها فرصة بسيطة لتبدأ الحركة
-    });
+
+    // إخفاء رسالة رمضان بعد انتهاء الأنيميشن (4.1 ثانية)
+    setTimeout(()=>{
+      const toast = document.getElementById('ramadanToast');
+      if(toast) toast.remove();
+    }, 4200);
   </script>
 </body>
-</html>Scroll down
+</html>
