@@ -4,34 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="VtG7Ro7J-T9g1SR1m9kVf5uRQ-Y2hhUU6AHlDqdSjHI" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
   <title>موقع حلبسة | المنصة الرسمية لـ 7LBSAA</title>
-  <meta name="description" content=" موقع حلبسة: وتمبلتات وميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم. زيادة جودة الصور" />
+  <meta name="description" content="موقع حلبسة: وتمبلتات وميمز، مدرسين ثانوية عامة، وتحدي معلومات كرة القدم. زيادة جودة الصور" />
+
   <link rel="canonical" href="https://7lbsaa1.github.io/7lbsaa/" />
 
-  <link rel="icon" href="7lbsaa.svg" type="image/svg" sizes="96x96" />
-  <link rel="apple-touch-icon" href="7lbsaa.svg" />
-  <link rel="shortcut icon" type="image/jpg" href="logox1.jpg" />
+  <!-- Favicon -->
+  <link rel="icon" href="fav.jpg" type="image/jpeg" sizes="512x512" />
+  <link rel="icon" href="fav.jpg" type="image/jpeg" sizes="96x96" />
+  <link rel="apple-touch-icon" href="fav.jpg" sizes="180x180" />
+  <link rel="shortcut icon" href="fav.jpg" type="image/jpeg" />
 
+  <!-- Open Graph & Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://7lbsaa1.github.io/7lbsaa/" />
   <meta property="og:title" content="موقع حلبسة | 7LBSAA" />
-  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم.تحسين الصور بالذكاء الاصطناعي." />
+  <meta property="og:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم. تحسين الصور بالذكاء الاصطناعي." />
   <meta property="og:image" content="https://7lbsaa1.github.io/7lbsaa/logox1.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="موقع حلبسة | 7LBSAA" />
-  <meta name="twitter:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم.تحسين صور بالذكاء الاصطناعي." />
+  <meta name="twitter:description" content="تمبلتات ميمز، مدرسين ثانوية عامة، وتحديات كرة القدم. تحسين صور بالذكاء الاصطناعي." />
   <meta name="twitter:image" content="https://7lbsaa1.github.io/7lbsaa/logox1.jpg" />
 
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "موقع حلبسة",
     "url": "https://7lbsaa1.github.io/7lbsaa/",
-    "logo": "https://7lbsaa1.github.io/7lbsaa/logox1.jpg"
+    "logo": "https://7lbsaa1.github.io/7lbsaa/fav.jpg"
   }
   </script>
 
@@ -77,113 +83,86 @@
       min-width:100%; min-height:100%; object-fit:cover; filter:none;
     }
 
-    /* ===== فوانيس رمضان ===== */
-    .fanos{
+    /* ===== زينة العيد ===== */
+    .eid-decoration{
       position: fixed;
-      top: 0;
-      z-index: 119;
-      width: 80px;
-      height: auto;
-      filter: drop-shadow(0 0 12px rgba(255, 200, 50, 0.75));
-      pointer-events: none;
-      transform-origin: top center;
-    }
-    /* الفانوس الأيمن */
-    .fanos-right{
-      right: 130px;
-      animation: swingRight 3s ease-in-out infinite;
-    }
-    /* الفانوس الأيسر */
-    .fanos-left{
-      left: 130px;
-      animation: swingLeft 3.4s ease-in-out infinite;
-    }
-
-    /* حبل الفانوس الأيمن */
-    .fanos-right::before,
-    .fanos-left::before{
-      content: '';
-      position: absolute;
-      top: -40px;
+      top: 8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 2px;
-      height: 40px;
-      background: linear-gradient(180deg, rgba(255,200,50,.9), rgba(255,200,50,.4));
-      border-radius: 2px;
+      z-index: 120;
+      width: 95px;
+      height: auto;
+      filter: drop-shadow(0 0 14px rgba(255, 200, 80, 0.8));
+      pointer-events: none;
+      animation: eidFloat 2.8s ease-in-out infinite;
     }
 
-    @keyframes swingRight{
-      0%   { transform: rotate(-12deg); }
-      50%  { transform: rotate(12deg);  }
-      100% { transform: rotate(-12deg); }
-    }
-    @keyframes swingLeft{
-      0%   { transform: rotate(12deg);  }
-      50%  { transform: rotate(-12deg); }
-      100% { transform: rotate(12deg);  }
+    @keyframes eidFloat{
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%     { transform: translateX(-50%) translateY(-6px); }
     }
 
-    /* ===== رسالة رمضان كريم ===== */
-    .ramadan-toast{
+    /* ===== رسالة العيد ===== */
+    .eid-toast{
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0.7);
       z-index: 9999;
-      background: linear-gradient(135deg, rgba(20,10,50,.92), rgba(80,30,10,.88));
-      border: 1px solid rgba(255,200,60,.45);
+      background: linear-gradient(135deg, rgba(20,30,80,.92), rgba(20,90,70,.88));
+      border: 1px solid rgba(255,220,100,.5);
       border-radius: 24px;
-      padding: 30px 36px;
+      padding: 26px 34px;
       text-align: center;
-      box-shadow: 0 0 60px rgba(255,180,0,.4), 0 20px 60px rgba(0,0,0,.55);
-      backdrop-filter: blur(18px);
+      box-shadow: 0 0 60px rgba(255,200,0,.35), 0 20px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(16px);
       min-width: 280px;
       opacity: 0;
-      animation: toastIn .6s ease forwards, toastOut .6s ease 3.5s forwards;
+      animation: eidToastIn .6s ease forwards, eidToastOut .6s ease 3.5s forwards;
       pointer-events: none;
     }
-    .ramadan-toast .toast-fanos-icon{
-      font-size: 2.8em;
-      display: block;
+    .eid-toast img{
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
       margin-bottom: 8px;
-      animation: gentlePulse 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(255,220,120,.7));
+      animation: eidPulse 1.6s ease-in-out infinite;
     }
-    .ramadan-toast h2{
+    .eid-toast h2{
       margin: 0 0 6px;
       font-size: 2em;
-      background: linear-gradient(90deg, #ffd54d, #ffaa00, #ffd54d);
+      background: linear-gradient(90deg, #ffe082, #ffb300, #ffe082);
       background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: shimmer 2.5s linear infinite;
     }
-    .ramadan-toast p{
+    .eid-toast p{
       margin: 0;
       font-size: 1em;
-      color: rgba(255,240,200,.85);
-      line-height: 1.6;
+      color: rgba(255,245,210,.9);
+      line-height: 1.7;
     }
-    /* نجوم صغيرة في الرسالة */
-    .ramadan-toast .stars{
-      margin-top: 12px;
-      font-size: 1.2em;
-      letter-spacing: 6px;
-      opacity: .75;
+    .eid-toast .stars{
+      margin-top: 10px;
+      font-size: 1.1em;
+      letter-spacing: 4px;
+      opacity: .8;
     }
 
-    @keyframes toastIn{
+    @keyframes eidToastIn{
       0%   { opacity:0; transform: translate(-50%,-50%) scale(0.7); }
       100% { opacity:1; transform: translate(-50%,-50%) scale(1);   }
     }
-    @keyframes toastOut{
+    @keyframes eidToastOut{
       0%   { opacity:1; transform: translate(-50%,-50%) scale(1);   }
       100% { opacity:0; transform: translate(-50%,-50%) scale(0.7); }
     }
-    @keyframes gentlePulse{
-      0%,100% { transform: scale(1);    }
-      50%      { transform: scale(1.1); }
+    @keyframes eidPulse{
+      0%,100% { transform: scale(1); }
+      50%     { transform: scale(1.08); }
     }
 
     /* شعار أعلى اليمين */
@@ -312,6 +291,7 @@
 
     .cards-container{display:grid; grid-template-columns:1fr; gap:22px; margin:24px auto 46px; max-width:1120px}
     @media (min-width: 900px){ .cards-container{grid-template-columns: repeat(3, 1fr)} }
+
     .card{
       border-radius:18px; overflow:hidden;
       border:1px solid var(--border-light);
@@ -326,6 +306,7 @@
       box-shadow: 0 14px 46px rgba(0,0,0,.32);
     }
     .card:hover{ transform: translateY(-6px) }
+
     .card-image{width:100%; height:210px; object-fit:cover}
     .card-content{padding:18px; text-align:center}
     .card-content h2{margin:0 0 8px; color: var(--accent-light)}
@@ -339,7 +320,10 @@
       transition: transform .25s ease, box-shadow .35s ease;
     }
     .card-button:hover{ transform: translateY(-3px) }
-    body.dark-mode .card-button{ background: linear-gradient(90deg,#ff9f2f,#ff6a2f); box-shadow: 0 10px 26px rgba(255,130,50,.35) }
+    body.dark-mode .card-button{
+      background: linear-gradient(90deg,#ff9f2f,#ff6a2f);
+      box-shadow: 0 10px 26px rgba(255,130,50,.35);
+    }
 
     /* ========== الفوتر ========== */
     .main-footer{
@@ -408,7 +392,10 @@
       border: 1px solid var(--border-light);
       transition: transform .25s ease, box-shadow .3s ease, border-color .35s ease;
     }
-    body.dark-mode .social-link{ background: rgba(255,255,255,.08); border-color: var(--border-dark); }
+    body.dark-mode .social-link{
+      background: rgba(255,255,255,.08);
+      border-color: var(--border-dark);
+    }
     .social-link:hover{ transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
     .social-link img{ width: 100%; height: 100%; object-fit: cover; }
 
@@ -422,10 +409,7 @@
       .footer-content{ flex-direction: column; text-align: center; }
       .footer-right, .footer-left{ justify-content: center; }
       .footer-right{ flex-direction: column; }
-      /* تصغير الفوانيس على الموبايل */
-      .fanos{ width: 55px; }
-      .fanos-right{ right: 115px; }
-      .fanos-left{ left: 115px; }
+      .eid-decoration{ width: 70px; }
     }
 
     @keyframes shimmer{ to{ background-position:300% center } }
@@ -434,16 +418,15 @@
 </head>
 <body>
 
-  <!-- ===== فوانيس رمضان ===== -->
-  <img src="fanos.png" alt="فانوس رمضان" class="fanos fanos-right" />
-  <img src="fanos.png" alt="فانوس رمضان" class="fanos fanos-left" />
+  <!-- ===== زينة العيد ===== -->
+  <img src="eid.png" alt="زينة العيد" class="eid-decoration" />
 
-  <!-- ===== رسالة رمضان كريم ===== -->
-  <div class="ramadan-toast" id="ramadanToast">
-    <span class="toast-fanos-icon">🪔</span>
-    <h2>رمضان كريم 🌙</h2>
-    <p>كل عام وأنتم بخير<br/>أعاده الله عليكم بالخير والبركة</p>
-    <div class="stars">✨ ✨ ✨</div>
+  <!-- ===== رسالة العيد ===== -->
+  <div class="eid-toast" id="eidToast">
+    <img src="eid.png" alt="عيد سعيد" />
+    <h2>عيد سعيد 🎉</h2>
+    <p>كل عام وأنتم بخير<br>تقبل الله طاعتكم وأعاد عليكم العيد بالفرح</p>
+    <div class="stars">✨ 🎊 ✨</div>
   </div>
 
   <img src="toplogo1.jpg" alt="شعار حلبسة" class="site-brand-float" />
@@ -474,7 +457,7 @@
   <div class="container">
     <header>
       <h1>⭐موقع حلبسة⭐</h1>
-      <div class="brand-sub">المنصة العربية الأولى للميمز والتمبلتات وطلاب الثانوية العامة وتحديات كرة القدم وزيادة جودة الصور </div>
+      <div class="brand-sub">المنصة العربية الأولى للميمز والتمبلتات وطلاب الثانوية العامة وتحديات كرة القدم وزيادة جودة الصور</div>
       <a class="contact-pill" href="https://7lbsaa1.github.io/7lbsaa.contact-us/" title="تواصل معنا">تواصل معنا</a>
     </header>
 
@@ -549,7 +532,7 @@
   </div>
 
   <script>
-    // ثيم
+    // الثيم
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme === 'dark'){ document.body.classList.add('dark-mode'); }
 
@@ -561,11 +544,13 @@
     // مودال العمل
     function showWorkingModal(){ document.getElementById('workingModal').style.display = 'flex'; }
     function closeModal(){ document.getElementById('workingModal').style.display = 'none'; }
-    document.getElementById('workingModal').addEventListener('click', (e)=>{ if(e.target.id==='workingModal') closeModal(); });
+    document.getElementById('workingModal').addEventListener('click', (e)=>{
+      if(e.target.id === 'workingModal') closeModal();
+    });
 
-    // إخفاء رسالة رمضان بعد انتهاء الأنيميشن (4.1 ثانية)
+    // إخفاء رسالة العيد بعد انتهاء الأنيميشن
     setTimeout(()=>{
-      const toast = document.getElementById('ramadanToast');
+      const toast = document.getElementById('eidToast');
       if(toast) toast.remove();
     }, 4200);
   </script>
